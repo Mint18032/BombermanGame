@@ -230,7 +230,8 @@ public class Sprite {
 			
 		return x2;
 	}
-	
+
+	//public static Sprite moveUp = movingSprite(player_up, player_down, player_up_2, 1,3 );
 	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;
 		return (animate % time > diff) ? x1 : x2; 
