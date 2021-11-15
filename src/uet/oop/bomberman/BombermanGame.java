@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Entity;
@@ -20,6 +21,7 @@ public class BombermanGame extends Application {
     
     public static final int WIDTH = 40;
     public static final int HEIGHT = 30;
+    public Image logo;
     
     private GraphicsContext gc;
     private Canvas canvas;
@@ -40,9 +42,12 @@ public class BombermanGame extends Application {
         // Tao root container
         Group root = new Group();
         root.getChildren().add(canvas);
+        logo = new Image("/decor/logo.jpg");
 
         // Tao scene
         Scene scene = new Scene(root);
+        stage.getIcons().add(logo);
+        stage.setTitle("Bomberman Game");
 
         // Them scene vao stage
         stage.setScene(scene);
