@@ -2,26 +2,52 @@ package uet.oop.bomberman.Game.entities;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import uet.oop.bomberman.Level.Coordinates;
+import uet.oop.bomberman.graphics.Render;
+import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 
-public abstract class Entity {
-    //Tọa độ X tính từ góc trái trên trong Canvas
-    protected int x;
+public abstract class Entity implements Render {
+    protected double x;
 
-    //Tọa độ Y tính từ góc trái trên trong Canvas
-    protected int y;
+    protected double y;
 
-    protected Image img;
+    protected boolean removed = false;
+    protected Sprite sprite;
 
-    //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity( int xUnit, int yUnit, Image img) {
-        this.x = xUnit * Sprite.SCALED_SIZE;
-        this.y = yUnit * Sprite.SCALED_SIZE;
-        this.img = img;
-    }
-
-    public void render(GraphicsContext gc) {
-        gc.drawImage(img, x, y);
-    }
+    @Override
     public abstract void update();
+
+    @Override
+    public abstract void render(Screen screen);
+
+    public void remove() {
+        removed = true;
+    }
+
+    public boolean Removed() {
+        return removed;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+    //Check collision.
+    public abstract boolean collision(Entity entity);
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public int getXTile() {
+        return Coordinates.pixelToTile(x + sprite.SIZE / 2);
+    }
+
+    public int getYTile() {
+        return Coordinates.pixelToTile(y - sprite.SIZE / 2);
+    }
 }

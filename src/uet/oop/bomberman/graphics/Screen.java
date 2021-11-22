@@ -21,6 +21,7 @@ public class Screen {
     public void clear() {
         Arrays.fill(pixels, 0);
     }
+
     public void renderEntity(int xe, int ye, Entity entity) {
         xe -= offsetX;
         ye -= offsetY;

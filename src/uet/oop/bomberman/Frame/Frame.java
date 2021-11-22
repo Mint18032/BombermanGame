@@ -1,4 +1,7 @@
 package uet.oop.bomberman.Frame;
 
-public class Frame {
+import javax.swing.*;
+
+public class Frame extends JFrame {
+
 }
