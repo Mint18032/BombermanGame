@@ -1,7 +1,6 @@
 package uet.oop.bomberman.Game.entities.Characters;
 
 import uet.oop.bomberman.Game.entities.Animation;
-import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.graphics.Screen;
 
@@ -21,8 +20,8 @@ public abstract class Characters extends Animation {
     //Calculate Move
     public abstract void calcMove();
     //Move
-    public abstract void canMove(double _x, double _y);
-    public abstract void move(double xmove, double ymove) ;
+    public abstract boolean canMove(double _x, double _y);
+    public abstract void move(double xa, double ya) ;
     //Kill
     public abstract void canKill();
     public abstract void afterKill();

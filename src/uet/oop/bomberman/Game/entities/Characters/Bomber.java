@@ -1,7 +1,5 @@
 package uet.oop.bomberman.Game.entities.Characters;
 
-import javafx.scene.image.Image;
-import jdk.internal.util.xml.impl.Input;
 import uet.oop.bomberman.Game.entities.Bomb.Bomb;
 import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.MapObjects.Item.Item;
@@ -31,8 +29,9 @@ public class Bomber extends Characters {
     }
 
     @Override
-    public void canMove(double _x, double _y) {
+    public boolean canMove(double _x, double _y) {
 
+        return false;
     }
 
     @Override
