@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
         setFocusable(true);
     }
 
-    public void getGame() {
+    public GameLoop getGame() {
         return gameLoop;
     }
 }

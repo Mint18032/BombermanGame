@@ -2,6 +2,7 @@ package uet.oop.bomberman.Frame;
 
 import uet.oop.bomberman.GameLoop;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,7 +17,7 @@ public class Frame extends JFrame {
 
         containerpane = new JPanel(new BorderLayout());
         _gamepane = new GamePanel(this);
-        nortificationPanel = new nortificationPanel(_gamepane.getGame());
+        nortificationPanel = new NortificationPanel(_gamepane.getGame());
 
         containerpane.add(nortificationPanel, BorderLayout.PAGE_START);
         containerpane.add(_gamepane, BorderLayout.PAGE_END);
