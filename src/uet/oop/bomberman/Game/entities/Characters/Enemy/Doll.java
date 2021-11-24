@@ -1,4 +1,8 @@
 package uet.oop.bomberman.Game.entities.Characters.Enemy;
 
-public class Doll {
+public class Doll extends Enemy{
+    @Override
+    protected void chooseSprite() {
+
+    }
 }
