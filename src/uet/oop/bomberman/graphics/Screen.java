@@ -6,6 +6,7 @@ import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameLoop;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class Screen {
@@ -80,6 +81,55 @@ public class Screen {
         }
 
         return temp;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getRealWidth() {
+        return width * GameLoop.SCALE;
+    }
+
+    public int getRealHeight() {
+        return height * GameLoop.SCALE;
+    }
+
+    public void drawCenteredString(String s, int w, int h, Graphics g) {
+        FontMetrics fm = g.getFontMetrics();
+        int x = (w - fm.stringWidth(s)) / 2;
+        int y = (fm.getAscent() + (h - (fm.getAscent() + fm.getDescent())) / 2);
+        g.drawString(s, x, y);
+    }
+
+    public void drawChangeLevel(Graphics g, int level) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, getRealWidth(), getRealHeight());
+
+        Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
+        g.setFont(font);
+        g.setColor(Color.white);
+        drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
+
+    }
+
+    public void drawEndGame(Graphics g, int points) {
+        g.setColor(Color.black);
+        g.fillRect(0, 0, getRealWidth(), getRealHeight());
+
+        Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
+        g.setFont(font);
+        g.setColor(Color.white);
+        drawCenteredString("GAME OVER", getRealWidth(), getRealHeight(), g);
+
+        font = new Font("Arial", Font.PLAIN, 10 * GameLoop.SCALE);
+        g.setFont(font);
+        g.setColor(Color.yellow);
+        drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (GameLoop.TILES_SIZE * 2) * GameLoop.SCALE, g);
     }
 
 }

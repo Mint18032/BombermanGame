@@ -89,7 +89,7 @@ public class LoadFileLevel extends LoadLevel {
                         break;
                     case '1':
                         gameboard.addCharacter(new Balloom(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + GameLoop.TILES_SIZE, gameboard));
-                        _board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
+                        gameboard.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
                         break;
                     case '2':
                         gameboard.addCharacter(new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + GameLoop.TILES_SIZE, gameboard));
