@@ -19,5 +19,10 @@ public class GameLoop extends Canvas {
     public static final int POINTS = 0;
 
     protected static int SCREENDELAY = 3;
+    private GameBoard gameBoard;
+
+    public GameBoard getGameBoard() {
+        return this.gameBoard;
+    }
 
 }

@@ -11,9 +11,9 @@ public class NortificationPanel extends JPanel {
     private JLabel pointsLabel;
 
     public NortificationPanel (GameLoop gameLoop) {
-        setLayout(new GridLayout());\
+        setLayout(new GridLayout());
 
-        timeLabel = new JLabel("Time: "+ gameLoop.getGameBoard().getTime());
+        timeLabel = new JLabel("Time: " + gameLoop.getGameBoard().getTime());
         timeLabel.setForeground(Color.white);
         timeLabel.setHorizontalAlignment(JLabel.CENTER);
 

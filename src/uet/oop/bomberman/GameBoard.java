@@ -33,7 +33,7 @@ public class GameBoard implements Render {
         this.input = input;
         this.screen = screen;
 
-        loadLevel(1);
+        loadLevel.loadLevel(1);
     }
 
     @Override
@@ -44,5 +44,21 @@ public class GameBoard implements Render {
     @Override
     public void render(Screen screen) {
 
+    }
+
+    public int getWidth() {
+        return loadLevel.getWidth();
+    }
+
+    public int getHeight() {
+        return loadLevel.getHeight();
+    }
+
+    public int getTime() {
+        return this.time;
+    }
+
+    public int getPoints() {
+        return this.points;
     }
 }

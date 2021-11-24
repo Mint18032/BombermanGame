@@ -9,7 +9,8 @@ import uet.oop.bomberman.GameLoop;
 import java.util.Arrays;
 
 public class Screen {
-    protected int width, height;
+    protected int width;
+    protected int height;
     private final int transparentColor = 0xffff_00ff;
     public int[] pixels;
 
