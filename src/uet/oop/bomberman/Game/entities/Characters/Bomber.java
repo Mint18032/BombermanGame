@@ -15,7 +15,7 @@ public class Bomber extends Characters {
 
     private List<Bomb> bombs;
     protected InputKeyboard input;
-    public static List<Item> items = new ArrayList<Item>();\
+    public static List<Item> items = new ArrayList<Item>();
 
 
     public Bomber (int x, int y, GameBoard gameBoard) {

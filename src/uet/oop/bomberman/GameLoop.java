@@ -21,6 +21,8 @@ public class GameLoop extends Canvas {
     protected static int SCREENDELAY = 3;
     private GameBoard gameBoard;
 
+    public GameLoop(Frame frame) {}
+
     public GameBoard getGameBoard() {
         return this.gameBoard;
     }

@@ -10,7 +10,6 @@ public class Frame extends JFrame {
     public GamePanel _gamepane;
     private JPanel containerpane;
     private NortificationPanel nortificationPanel;
-
     private GameLoop gameLoop;
 
     public Frame() {
@@ -23,7 +22,6 @@ public class Frame extends JFrame {
         containerpane.add(_gamepane, BorderLayout.PAGE_END);
 
         gameLoop = _gamepane.getGame();
-
         add(containerpane);
 
         setResizable(false);
@@ -41,5 +39,9 @@ public class Frame extends JFrame {
 
     public void setPoints(int points) {
         nortificationPanel.setPoints(points);
+    }
+
+    private void renderMenu() {
+
     }
 }
