@@ -5,22 +5,28 @@ import uet.oop.bomberman.GameLoop;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class GamePanel extends JPanel {
 
-    private GameLoop gameLoop;
+	private GameLoop _gameLoop;
+	
+	public GamePanel(Frame frame) {
+		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(GameLoop.WIDTH * GameLoop.SCALE, GameLoop.HEIGHT * GameLoop.SCALE));
 
-    public GamePanel (Frame _frame) {
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(GameLoop.WIDTH*GameLoop.SCALE, GameLoop.HEIGHT*GameLoop.SCALE));
+		_gameLoop = new GameLoop(frame);
 
-        gameLoop = new GameLoop(_frame);
+		add(_gameLoop);
 
-        add(gameLoop);
-        setVisible(true);
-        setFocusable(true);
-    }
+		_gameLoop.setVisible(true);
 
-    public GameLoop getGame() {
-        return gameLoop;
-    }
+		setVisible(true);
+		setFocusable(true);
+		
+	}
+
+	public GameLoop getGame() {
+		return _gameLoop;
+	}
+	
 }

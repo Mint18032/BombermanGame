@@ -1,53 +1,51 @@
 package uet.oop.bomberman.Game.entities;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import uet.oop.bomberman.Level.Coordinates;
 import uet.oop.bomberman.graphics.Render;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.Level.Coordinates;
 
 public abstract class Entity implements Render {
-    protected double x;
 
-    protected double y;
+	protected double _x, _y;
+	protected boolean _removed = false;
+	protected Sprite _sprite;
 
-    protected boolean removed = false;
-    protected Sprite sprite;
+	@Override
+	public abstract void update();
 
-    @Override
-    public abstract void update();
+	@Override
+	public abstract void render(Screen screen);
+	
+	public void remove() {
+		_removed = true;
+	}
+	
+	public boolean isRemoved() {
+		return _removed;
+	}
+	
+	public Sprite getSprite() {
+		return _sprite;
+	}
 
-    @Override
-    public abstract void render(Screen screen);
+	public abstract boolean collide(Entity e);
 
-    public void remove() {
-        removed = true;
-    }
+	public double getX() {
+		return _x;
+	}
+	
+	public double getY() {
+		return _y;
+	}
+	
+	public int getXTile() {
+		return Coordinates.pixelToTile(_x + _sprite.SIZE / 2);
+	}
+	
+	public int getYTile() {
+		return Coordinates.pixelToTile(_y - _sprite.SIZE / 2);
+	}
 
-    public boolean Removed() {
-        return removed;
-    }
-
-    public Sprite getSprite() {
-        return sprite;
-    }
-    //Check collision.
-    public abstract boolean collision(Entity entity);
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public int getXTile() {
-        return Coordinates.pixelToTile(x + sprite.SIZE / 2);
-    }
-
-    public int getYTile() {
-        return Coordinates.pixelToTile(y - sprite.SIZE / 2);
-    }
+    
 }

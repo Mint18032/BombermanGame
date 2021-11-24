@@ -1,36 +1,58 @@
 package uet.oop.bomberman.Game.entities.Characters;
 
-import uet.oop.bomberman.Game.entities.Animation;
 import uet.oop.bomberman.GameBoard;
+import uet.oop.bomberman.GameLoop;
+import uet.oop.bomberman.Game.entities.Animation;
 import uet.oop.bomberman.graphics.Screen;
 
+/**
+ * Bao gồm Bomber và Enemy
+ */
 public abstract class Characters extends Animation {
-    protected int direction = -1;
-    protected boolean alive = true;
-    protected boolean moving = false;
-    protected GameBoard gameBoard;
-    public int timeAfter = 40;
+	
+	protected GameBoard _Game_board;
+	protected int _direction = -1;
+	protected boolean _alive = true;
+	protected boolean _moving = false;
+	public int _timeAfter = 40;
+	
+	public Characters(int x, int y, GameBoard gameBoard) {
+		_x = x;
+		_y = y;
+		_Game_board = gameBoard;
+	}
+	
+	@Override
+	public abstract void update();
+	
+	@Override
+	public abstract void render(Screen screen);
 
-    public Characters(int x, int y, GameBoard board) {
-        this.x = x;
-        this.y = y;
-        gameBoard = board;
-    }
+	/**
+	 * Tính toán hướng đi
+	 */
+	protected abstract void calculateMove();
+	
+	protected abstract void move(double xa, double ya);
 
-    //Calculate Move
-    public abstract void calcMove();
-    //Move
-    public abstract boolean canMove(double _x, double _y);
-    public abstract void move(double xa, double ya) ;
-    //Kill
-    public abstract void canKill();
-    public abstract void afterKill();
+	/**
+	 * Được gọi khi đối tượng bị tiêu diệt
+	 */
+	public abstract void kill();
 
+	/**
+	 * Xử lý hiệu ứng bị tiêu diệt
+	 */
+	protected abstract void afterKill();
 
-    @Override
-    public void update() {}
+	protected abstract boolean canMove(double x, double y);
 
-    @Override
-    public void render(Screen screen) {}
-
+	protected double getXMessage() {
+		return (_x * GameLoop.SCALE) + (_sprite.SIZE / 2 * GameLoop.SCALE);
+	}
+	
+	protected double getYMessage() {
+		return (_y* GameLoop.SCALE) - (_sprite.SIZE / 2 * GameLoop.SCALE);
+	}
+	
 }

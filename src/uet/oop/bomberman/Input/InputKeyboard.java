@@ -3,30 +3,35 @@ package uet.oop.bomberman.Input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím
+ */
 public class InputKeyboard implements KeyListener {
+	
+	private boolean[] keys = new boolean[120]; //120 is enough to this game
+	public boolean up, down, left, right, space;
+	
+	public void update() {
+		up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
+		down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
+		left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
+		right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
+		space = keys[KeyEvent.VK_SPACE] || keys[KeyEvent.VK_X];
+	}
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
+	@Override
+	public void keyTyped(KeyEvent e) {}
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        keypress[e.getKeyCode()] = true;
-    }
+	@Override
+	public void keyPressed(KeyEvent e) {
+		keys[e.getKeyCode()] = true;
+		
+	}
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-        keypress[e.getKeyCode()] = false;
-    }
+	@Override
+	public void keyReleased(KeyEvent e) {
+		keys[e.getKeyCode()] = false;
+		
+	}
 
-    private boolean[] keypress = new boolean[1000];
-    public boolean up, right, left, down, space;
-
-    public void update() {
-        up = keypress[KeyEvent.VK_UP];
-        right = keypress[KeyEvent.VK_RIGHT];
-        left = keypress[KeyEvent.VK_LEFT];
-        down = keypress[KeyEvent.VK_DOWN];
-        space = keypress[KeyEvent.VK_SPACE];
-    }
 }

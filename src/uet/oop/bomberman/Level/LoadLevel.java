@@ -1,31 +1,36 @@
 package uet.oop.bomberman.Level;
 
 import uet.oop.bomberman.GameBoard;
+import uet.oop.bomberman.GameExeption.LoadLevelException;
 
+/**
+ * Load và lưu trữ thông tin bản đồ các màn chơi
+ */
 public abstract class LoadLevel {
 
-    protected int width = 20, height = 20;
-    protected int level;
-    protected GameBoard gameboard;
+	protected int _width = 20, _height = 20; // default values just for testing
+	protected int _level;
+	protected GameBoard _Game_board;
 
-    public LoadLevel(GameBoard gameboard, int level) {
-        this.gameboard = gameboard;
-        loadLevel(level);
-    }
+	public LoadLevel(GameBoard gameBoard, int level) throws LoadLevelException {
+		_Game_board = gameBoard;
+		loadLevel(level);
+	}
 
-    public abstract void loadLevel(int level);
+		public abstract void loadLevel(int level) throws LoadLevelException;
 
-    public abstract void createEntities();
+		public abstract void createEntities();
 
-    public int getWidth() {
-        return width;
-    }
+		public int getWidth() {
+			return _width;
+		}
 
-    public int getHeight() {
-        return height;
-    }
+		public int getHeight() {
+			return _height;
+		}
 
-    public int getLevel() {
-        return level;
-    }
+		public int getLevel() {
+			return _level;
+		}
+
 }
