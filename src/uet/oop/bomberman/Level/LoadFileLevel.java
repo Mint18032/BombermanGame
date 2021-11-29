@@ -1,26 +1,27 @@
 package uet.oop.bomberman.Level;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import uet.oop.bomberman.GameBoard;
-import uet.oop.bomberman.GameLoop;
-import uet.oop.bomberman.Game.entities.LayerEntity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.Balloom;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.Doll;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.Oneal;
-import uet.oop.bomberman.Game.entities.MapObjects.Grass;
-import uet.oop.bomberman.Game.entities.MapObjects.Portal;
-import uet.oop.bomberman.Game.entities.MapObjects.Wall;
+import uet.oop.bomberman.Game.entities.LayerEntity;
 import uet.oop.bomberman.Game.entities.MapObjects.DestroyableObject.Brick;
+import uet.oop.bomberman.Game.entities.MapObjects.Grass;
 import uet.oop.bomberman.Game.entities.MapObjects.Item.BombItem;
 import uet.oop.bomberman.Game.entities.MapObjects.Item.FlameItem;
 import uet.oop.bomberman.Game.entities.MapObjects.Item.SpeedItem;
+import uet.oop.bomberman.Game.entities.MapObjects.Portal;
+import uet.oop.bomberman.Game.entities.MapObjects.Wall;
+import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameExeption.LoadLevelException;
+import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoadFileLevel extends LoadLevel {
 
@@ -36,18 +37,18 @@ public class LoadFileLevel extends LoadLevel {
 
     @Override
     public void loadLevel(int level) {
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
         try {
             FileReader fr = new FileReader("res\\levels\\Level" + level + ".txt");//doc tep luu map
             BufferedReader br = new BufferedReader(fr);
             String line = br.readLine();
-            while (!line.equals("")) {
+            while (line.equals("") == false) {
                 list.add(line);
                 line = br.readLine();
                 //doc file txt luu vao list
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.toString();
         }
         String[] arrays = list.get(0).trim().split(" ");
         _level = Integer.parseInt(arrays[0]);
