@@ -5,6 +5,7 @@ import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

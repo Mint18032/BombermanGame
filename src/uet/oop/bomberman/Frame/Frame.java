@@ -43,5 +43,4 @@ public class Frame extends JFrame {
 	public void setPoints(int points) {
 		_infopanel.setPoints(points);
 	}
-	
 }

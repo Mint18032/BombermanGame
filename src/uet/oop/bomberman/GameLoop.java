@@ -195,8 +195,11 @@ public class GameLoop extends Canvas {
 	}
 	
 	public void pause() {
+		if (music != null)
+			music.stop();
 		_paused = true;
 	}
+
 	public static void setBombRate(int bombRate) {
         GameLoop.bombRate = bombRate;
     }
