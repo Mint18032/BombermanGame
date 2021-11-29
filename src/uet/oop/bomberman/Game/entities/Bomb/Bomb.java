@@ -7,6 +7,7 @@ import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.Level.Coordinates;
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 public class Bomb extends Animation {
@@ -24,6 +25,8 @@ public class Bomb extends Animation {
 		_y = y;
 		_Game_board = gameBoard;
 		_sprite = Sprite.bomb;
+		sound = new Sound("placeBomb");
+		sound.play();
 	}
 	
 	@Override
@@ -85,6 +88,8 @@ public class Bomb extends Animation {
                 for (int i = 0; i < _flames.length; i++) {
                     _flames[i] = new Flame((int) _x, (int) _y, i, GameLoop.getBombRadius(), _Game_board);
                 }
+		sound.setUsage("explosion");
+		sound.play();
 	}
         public void time_explode() {
 		_timeToExplode = 0;

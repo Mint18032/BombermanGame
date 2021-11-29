@@ -9,7 +9,14 @@ public class Sound {
     private File file;
     private Clip clip;
 
+    public Sound() {
+    }
+
     public Sound(String usage) {
+        setUsage(usage);
+    }
+
+    public void setUsage(String usage) {
         this.usage = usage;
         String path = "res/sounds/" + usage + ".wav";
         try {

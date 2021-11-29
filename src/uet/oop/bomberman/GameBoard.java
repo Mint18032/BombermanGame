@@ -7,6 +7,7 @@ import uet.oop.bomberman.Game.entities.Bomb.FlameSegment;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Characters;
 import uet.oop.bomberman.GameExeption.LoadLevelException;
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Render;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.Input.InputKeyboard;
@@ -42,12 +43,12 @@ public class GameBoard implements Render {
 		_input = input;
 		_screen = screen;
 		
-		loadLevel(1); //start in level 1
+		loadLevel(1); //start at level 1
 	}
 	
 	@Override
 	public void update() {
-		if( _gameLoop.isPaused() ) return;
+		if(_gameLoop.isPaused()) return;
 		
 		updateEntities();
 		updateCharacters();
@@ -116,6 +117,8 @@ public class GameBoard implements Render {
 	public void endGame() {
 		_screenToShow = 1;
 		_gameLoop.resetScreenDelay();
+		Sound end = new Sound("gameOver");
+		end.play();
 		_gameLoop.pause();
 	}
 	
@@ -161,7 +164,7 @@ public class GameBoard implements Render {
 		return res;
 	}
 	
-	public List<Bomb> 	getBombs() {
+	public List<Bomb> getBombs() {
 		return _bombs;
 	}
 	
@@ -294,7 +297,7 @@ public class GameBoard implements Render {
 	}
 	
 	protected void updateMessages() {
-		if( _gameLoop.isPaused() ) return;
+		if(_gameLoop.isPaused()) return;
 		Nortification m;
 		int left;
 		for (int i = 0; i < _nortifications.size(); i++) {

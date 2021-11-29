@@ -47,5 +47,4 @@ public abstract class Entity implements Render {
 		return Coordinates.pixelToTile(_y - _sprite.SIZE / 2);
 	}
 
-    
 }

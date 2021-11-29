@@ -22,8 +22,6 @@ import java.util.List;
 public class BombermanGame  {
 
     public static void main(String[] args) {
-        Sound music = new Sound("music");
-        music.play();
         Frame frame = new Frame();
     }
 }

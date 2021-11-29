@@ -1,6 +1,7 @@
 package uet.oop.bomberman.Frame;
 
 import uet.oop.bomberman.GameLoop;
+import uet.oop.bomberman.Sound.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,8 +31,8 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);	
-		
+		setVisible(true);
+
 		_gameLoop.start();
 	}
 	

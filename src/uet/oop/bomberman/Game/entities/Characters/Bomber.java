@@ -30,6 +30,7 @@ public class Bomber extends Characters {
         _bombs = _Game_board.getBombs();
         _input = _Game_board.getInput();
         _sprite = Sprite.player_right;
+        sound = new Sound("moving");
     }
 
     @Override
@@ -60,6 +61,7 @@ public class Bomber extends Characters {
             _sprite = Sprite.player_dead1;
 
         screen.renderEntity((int) _x, (int) _y - _sprite.SIZE, this);
+        sound.play();
     }
 
     public void calculateXOffset() {

@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.Frame.Frame;
 import uet.oop.bomberman.Input.InputKeyboard;
@@ -14,8 +15,6 @@ import java.awt.image.DataBufferInt;
  * Gọi phương thức render(), update() cho tất cả các entity
  */
 public class GameLoop extends Canvas {
-
-    
 
 	public static final int TILES_SIZE = 16,
 							WIDTH = TILES_SIZE * (31 / 2),
@@ -37,8 +36,7 @@ public class GameLoop extends Canvas {
 	protected static int bombRate = BOMBRATE;
 	protected static int bombRadius = BOMBRADIUS;
 	protected static double bomberSpeed = BOMBERSPEED;
-	
-	
+
 	protected int _screenDelay = SCREENDELAY;
 	
 	private InputKeyboard _input;
@@ -48,6 +46,7 @@ public class GameLoop extends Canvas {
 	private GameBoard _Game_board;
 	private Screen screen;
 	private Frame _frame;
+	private Sound music;
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -61,6 +60,8 @@ public class GameLoop extends Canvas {
 		
 		_Game_board = new GameBoard(this, _input, screen);
 		addKeyListener(_input);
+		music = new Sound("music");
+		music.play();
 	}
 	
 	
@@ -113,7 +114,7 @@ public class GameLoop extends Canvas {
 	public void start() {
 		_running = true;
 		
-		long  lastTime = System.nanoTime();
+		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
 		double delta = 0;
@@ -135,13 +136,13 @@ public class GameLoop extends Canvas {
 					_Game_board.setShow(-1);
 					_paused = false;
 				}
-					
+				music.stop();
 				renderScreen();
 			} else {
+				music.play();
 				renderGame();
 			}
-				
-			
+
 			frames++;
 			if(System.currentTimeMillis() - timer > 1000) {
 				_frame.setTime(_Game_board.subtractTime());
