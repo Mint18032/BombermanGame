@@ -1,18 +1,18 @@
 package uet.oop.bomberman;
 
-import uet.oop.bomberman.Game.entities.Entity;
-import uet.oop.bomberman.Game.entities.Nortification;
 import uet.oop.bomberman.Game.entities.Bomb.Bomb;
 import uet.oop.bomberman.Game.entities.Bomb.FlameSegment;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Characters;
+import uet.oop.bomberman.Game.entities.Entity;
+import uet.oop.bomberman.Game.entities.Nortification;
 import uet.oop.bomberman.GameExeption.LoadLevelException;
-import uet.oop.bomberman.Sound.Sound;
-import uet.oop.bomberman.graphics.Render;
-import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.Input.InputKeyboard;
 import uet.oop.bomberman.Level.LoadFileLevel;
 import uet.oop.bomberman.Level.LoadLevel;
+import uet.oop.bomberman.Sound.Sound;
+import uet.oop.bomberman.graphics.Render;
+import uet.oop.bomberman.graphics.Screen;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -62,6 +62,9 @@ public class GameBoard implements Render {
 		}
 	}
 
+	/**
+	 * Render.
+	 */
 	@Override
 	public void render(Screen screen) {
 		if( _gameLoop.isPaused() ) return;
@@ -82,7 +85,76 @@ public class GameBoard implements Render {
 		renderCharacter(screen);
 		
 	}
-	
+
+	protected void renderCharacter(Screen screen) {
+		Iterator<Characters> itr = _characters.iterator();
+
+		while(itr.hasNext())
+			itr.next().render(screen);
+	}
+
+	protected void renderBombs(Screen screen) {
+		Iterator<Bomb> itr = _bombs.iterator();
+
+		while(itr.hasNext())
+			itr.next().render(screen);
+	}
+
+	public void renderMessages(Graphics g) {
+		Nortification m;
+		for (int i = 0; i < _nortifications.size(); i++) {
+			m = _nortifications.get(i);
+
+			g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
+			g.setColor(m.getColor());
+			g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * GameLoop.SCALE, (int)m.getY());
+		}
+	}
+
+	/**
+	 * Update.
+	 */
+	protected void updateEntities() {
+		if( _gameLoop.isPaused() ) return;
+		for (int i = 0; i < _entities.length; i++) {
+			_entities[i].update();
+		}
+	}
+
+	protected void updateCharacters() {
+		if( _gameLoop.isPaused() ) return;
+		Iterator<Characters> itr = _characters.iterator();
+
+		while(itr.hasNext() && !_gameLoop.isPaused())
+			itr.next().update();
+	}
+
+	protected void updateBombs() {
+		if( _gameLoop.isPaused() ) return;
+		Iterator<Bomb> itr = _bombs.iterator();
+
+		while(itr.hasNext())
+			itr.next().update();
+	}
+
+	protected void updateMessages() {
+		if(_gameLoop.isPaused()) return;
+		Nortification m;
+		int left;
+		for (int i = 0; i < _nortifications.size(); i++) {
+			m = _nortifications.get(i);
+			left = m.getDuration();
+
+			if(left > 0)
+				m.setDuration(--left);
+			else
+				_nortifications.remove(i);
+		}
+	}
+
+	/**
+	 * Level.
+	 */
 	public void nextLevel() {
                 GameLoop.setBombRadius(1);
                 GameLoop.setBombRate(1);
@@ -108,7 +180,10 @@ public class GameBoard implements Render {
 			endGame();
 		}
 	}
-	
+
+	/**
+	 * End Game.
+	 */
 	protected void detectEndGame() {
 		if(_time <= 0)
 			endGame();
@@ -128,10 +203,13 @@ public class GameBoard implements Render {
 			if(_characters.get(i) instanceof Bomber == false)
 				++total;
 		}
-		
+
 		return total == 0;
 	}
-	
+
+	/**
+	 * Draw Screen to play.
+	 */
 	public void drawScreen(Graphics g) {
 		switch (_screenToShow) {
 			case 1:
@@ -145,7 +223,10 @@ public class GameBoard implements Render {
 				break;
 		}
 	}
-	
+
+	/**
+	 * Get place.
+	 */
 	public Entity getEntity(double x, double y, Characters m) {
 		
 		Entity res = null;
@@ -231,7 +312,10 @@ public class GameBoard implements Render {
 	public Entity getEntityAt(double x, double y) {
 		return _entities[(int)x + (int)y * _Load_level.getWidth()];
 	}
-	
+
+	/**
+	 * Add to GameBoard.
+	 */
 	public void addEntity(int pos, Entity e) {
 		_entities[pos] = e;
 	}
@@ -243,74 +327,17 @@ public class GameBoard implements Render {
 	public void addBomb(Bomb e) {
 		_bombs.add(e);
 	}
-	
+
+	/**
+	 * Thêm thông tin điểm vào GameBoard
+	 */
 	public void addMessage(Nortification e) {
 		_nortifications.add(e);
 	}
 
-	protected void renderCharacter(Screen screen) {
-		Iterator<Characters> itr = _characters.iterator();
-		
-		while(itr.hasNext())
-			itr.next().render(screen);
-	}
-	
-	protected void renderBombs(Screen screen) {
-		Iterator<Bomb> itr = _bombs.iterator();
-		
-		while(itr.hasNext())
-			itr.next().render(screen);
-	}
-	
-	public void renderMessages(Graphics g) {
-		Nortification m;
-		for (int i = 0; i < _nortifications.size(); i++) {
-			m = _nortifications.get(i);
-			
-			g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
-			g.setColor(m.getColor());
-			g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * GameLoop.SCALE, (int)m.getY());
-		}
-	}
-	
-	protected void updateEntities() {
-		if( _gameLoop.isPaused() ) return;
-		for (int i = 0; i < _entities.length; i++) {
-			_entities[i].update();
-		}
-	}
-	
-	protected void updateCharacters() {
-		if( _gameLoop.isPaused() ) return;
-		Iterator<Characters> itr = _characters.iterator();
-		
-		while(itr.hasNext() && !_gameLoop.isPaused())
-			itr.next().update();
-	}
-	
-	protected void updateBombs() {
-		if( _gameLoop.isPaused() ) return;
-		Iterator<Bomb> itr = _bombs.iterator();
-		
-		while(itr.hasNext())
-			itr.next().update();
-	}
-	
-	protected void updateMessages() {
-		if(_gameLoop.isPaused()) return;
-		Nortification m;
-		int left;
-		for (int i = 0; i < _nortifications.size(); i++) {
-			m = _nortifications.get(i);
-			left = m.getDuration();
-			
-			if(left > 0) 
-				m.setDuration(--left);
-			else
-				_nortifications.remove(i);
-		}
-	}
-
+	/**
+	 * Tính thời gian đếm ngược.
+	 */
 	public int subtractTime() {
 		if(_gameLoop.isPaused())
 			return this._time;
@@ -324,10 +351,6 @@ public class GameBoard implements Render {
 
 	public LoadLevel getLevel() {
 		return _Load_level;
-	}
-
-	public GameLoop getGame() {
-		return _gameLoop;
 	}
 
 	public int getShow() {

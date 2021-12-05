@@ -63,8 +63,7 @@ public class GameLoop extends Canvas {
 		music = new Sound("music");
 		music.play();
 	}
-	
-	
+
 	private void renderGame() {
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
