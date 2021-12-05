@@ -6,6 +6,7 @@ import uet.oop.bomberman.Frame.Frame;
 import uet.oop.bomberman.Input.InputKeyboard;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -107,7 +108,13 @@ public class GameLoop extends Canvas {
 
 	private void update() {
 		_input.update();
-		_Game_board.update();
+		if (_input.paused) {
+			if (!_paused) {
+				pauseGame();
+			}
+		} else if (!_paused) {
+			_Game_board.update();
+		}
 	}
 	
 	public void start() {
@@ -129,7 +136,7 @@ public class GameLoop extends Canvas {
 				updates++;
 				delta--;
 			}
-			
+
 			if(_paused) {
 				if(_screenDelay <= 0) {
 					_Game_board.setShow(-1);
@@ -150,7 +157,7 @@ public class GameLoop extends Canvas {
 				_frame.setTitle(TITLE + " | " + updates + " rate, " + frames + " fps");
 				updates = 0;
 				frames = 0;
-				
+
 				if(_Game_board.getShow() == 2)
 					--_screenDelay;
 			}
@@ -192,11 +199,31 @@ public class GameLoop extends Canvas {
 	public boolean isPaused() {
 		return _paused;
 	}
-	
+
 	public void pause() {
-		if (music != null)
-			music.stop();
 		_paused = true;
+	}
+
+	public void pauseGame() { // Press P
+		if (music != null) {
+			music.stop();
+		}
+		_paused = true;
+		_input.paused = false;
+		while(_paused) {
+			_Game_board.setShow(3);
+			renderScreen();
+			_input.update();
+//			if (_input.paused) {
+//				resume();
+//			}
+//			TODO: Xem lại.
+		}
+	}
+
+	public void resume() {
+		_paused = false;
+		music.play();
 	}
 
 	public static void setBombRate(int bombRate) {

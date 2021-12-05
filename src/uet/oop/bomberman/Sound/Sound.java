@@ -4,6 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 public class Sound {
+    public static Boolean muted = false;
     private String usage;
     private Boolean isPlaying = false;
     private File file;
@@ -30,6 +31,9 @@ public class Sound {
     }
 
     public void play() {
+        if (muted) {
+            return;
+        }
         if (usage.equals("music")) {
             clip.loop(100);
         } else {
@@ -38,9 +42,17 @@ public class Sound {
         isPlaying = true;
     }
 
-    public void stop(){
+    public void stop() {
         clip.stop();
         isPlaying = false;
+    }
+
+    public static void mute() {
+        muted = true;
+    }
+
+    public static void unmute() {
+        muted = false;
     }
 
     public boolean getIsPlaying() {

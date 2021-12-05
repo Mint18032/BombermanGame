@@ -166,7 +166,6 @@ public class GameBoard implements Render {
 		_time = GameLoop.TIME;
 		_screenToShow = 2;
 		_gameLoop.resetScreenDelay();
-		_gameLoop.pause();
 		_characters.clear();
 		_bombs.clear();
 		_nortifications.clear();
