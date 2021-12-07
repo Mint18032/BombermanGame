@@ -30,7 +30,6 @@ public class Bomber extends Characters {
         _bombs = _Game_board.getBombs();
         _input = _Game_board.getInput();
         _sprite = Sprite.player_right;
-        sound = new Sound("moving");
     }
 
     @Override
@@ -43,6 +42,15 @@ public class Bomber extends Characters {
 
         if (_timeBetweenPutBombs < -7500) _timeBetweenPutBombs = 0;
         else _timeBetweenPutBombs--;
+
+        if (_input.paused) {
+            _Game_board.pauseGame();
+        }
+
+        if (_input.resume) {
+            _Game_board.resume();
+        }
+
 
         animate();
 
@@ -61,7 +69,6 @@ public class Bomber extends Characters {
             _sprite = Sprite.player_dead1;
 
         screen.renderEntity((int) _x, (int) _y - _sprite.SIZE, this);
-        sound.play();
     }
 
     public void calculateXOffset() {
@@ -87,7 +94,7 @@ public class Bomber extends Characters {
 
     protected void placeBomb(int x, int y) {
         Bomb b = new Bomb(x, y, _Game_board);
-	_Game_board.addBomb(b);
+        _Game_board.addBomb(b);
     }
 
     private void clearBombs() {

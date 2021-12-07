@@ -5,7 +5,6 @@ import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -115,7 +114,7 @@ public class Screen {
 	public void drawPaused(Graphics g) {
 		Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
 		g.setFont(font);
-		g.setColor(Color.black);
+		g.setColor(Color.white);
 		drawCenteredString("PAUSED", getRealWidth(), getRealHeight(), g);
 		
 	}

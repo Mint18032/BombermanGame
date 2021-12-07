@@ -1,15 +1,15 @@
 package uet.oop.bomberman.Game.entities.Bomb;
 
-import uet.oop.bomberman.Game.entities.Animation;
-import uet.oop.bomberman.Game.entities.Characters.Bomber;
-import uet.oop.bomberman.Game.entities.Characters.Characters;
-import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameLoop;
-import uet.oop.bomberman.Level.Coordinates;
-import uet.oop.bomberman.Sound.Sound;
+import uet.oop.bomberman.Game.entities.Animation;
+import uet.oop.bomberman.Game.entities.Entity;
+import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.Game.entities.Characters.Characters;
+import uet.oop.bomberman.Level.Coordinates;
+import uet.oop.bomberman.Sound.Sound;
 public class Bomb extends Animation {
 
 	protected double _timeToExplode = 120; //2 seconds - thoi gian phat no
@@ -25,8 +25,6 @@ public class Bomb extends Animation {
 		_y = y;
 		_Game_board = gameBoard;
 		_sprite = Sprite.bomb;
-		sound = new Sound("placeBomb");
-		sound.play();
 	}
 	
 	@Override
@@ -88,8 +86,6 @@ public class Bomb extends Animation {
                 for (int i = 0; i < _flames.length; i++) {
                     _flames[i] = new Flame((int) _x, (int) _y, i, GameLoop.getBombRadius(), _Game_board);
                 }
-		sound.setUsage("explosion");
-		sound.play();
 	}
         public void time_explode() {
 		_timeToExplode = 0;
