@@ -108,13 +108,8 @@ public class GameLoop extends Canvas {
 
 	private void update() {
 		_input.update();
-		if (_input.paused) {
-			if (!_paused) {
-				pauseGame();
-			}
-		} else if (!_paused) {
-			_Game_board.update();
-		}
+		_Game_board.update();
+
 	}
 	
 	public void start() {
@@ -202,28 +197,6 @@ public class GameLoop extends Canvas {
 
 	public void pause() {
 		_paused = true;
-	}
-
-	public void pauseGame() { // Press P
-		if (music != null) {
-			music.stop();
-		}
-		_paused = true;
-		_input.paused = false;
-		while(_paused) {
-			_Game_board.setShow(3);
-			renderScreen();
-			_input.update();
-//			if (_input.paused) {
-//				resume();
-//			}
-//			TODO: Xem lại.
-		}
-	}
-
-	public void resume() {
-		_paused = false;
-		music.play();
 	}
 
 	public static void setBombRate(int bombRate) {
