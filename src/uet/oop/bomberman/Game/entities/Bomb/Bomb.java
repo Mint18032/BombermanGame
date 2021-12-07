@@ -25,6 +25,8 @@ public class Bomb extends Animation {
 		_y = y;
 		_Game_board = gameBoard;
 		_sprite = Sprite.bomb;
+		sound = new Sound("placeBomb");
+		sound.play();
 	}
 	
 	@Override
@@ -86,6 +88,8 @@ public class Bomb extends Animation {
                 for (int i = 0; i < _flames.length; i++) {
                     _flames[i] = new Flame((int) _x, (int) _y, i, GameLoop.getBombRadius(), _Game_board);
                 }
+		sound.setUsage("explosion");
+		sound.play();
 	}
         public void time_explode() {
 		_timeToExplode = 0;

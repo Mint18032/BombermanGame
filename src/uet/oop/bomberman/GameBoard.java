@@ -113,7 +113,6 @@ public class GameBoard implements Render {
 			endGame();
 	}
 
-
 	public void endGame() {
 		_screenToShow = 1;
 		_gameLoop.resetScreenDelay();
@@ -174,7 +173,7 @@ public class GameBoard implements Render {
 		return res;
 	}
 	
-	public List<Bomb> 	getBombs() {
+	public List<Bomb> getBombs() {
 		return _bombs;
 	}
 	
