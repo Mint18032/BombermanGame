@@ -106,6 +106,9 @@ public class GameLoop extends Canvas {
 		bs.show();
 	}
 
+	/**
+	 * Update Game.
+	 */
 	private void update() {
 		_input.update();
 		_Game_board.update();
