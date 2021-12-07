@@ -1,12 +1,11 @@
 package uet.oop.bomberman;
 
-import uet.oop.bomberman.Sound.Sound;
-import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.Frame.Frame;
 import uet.oop.bomberman.Input.InputKeyboard;
+import uet.oop.bomberman.Sound.Sound;
+import uet.oop.bomberman.graphics.Screen;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
