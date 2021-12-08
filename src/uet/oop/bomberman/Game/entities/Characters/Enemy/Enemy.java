@@ -8,6 +8,7 @@ import uet.oop.bomberman.Game.entities.Bomb.Flame;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Characters;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.AutoMove.AM;
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.Level.Coordinates;
@@ -144,6 +145,8 @@ public abstract class Enemy extends Characters {
 
 		Nortification msg = new Nortification("+" + _points, getXMessage(), getYMessage(), 2, Color.white, 14);
 		_Game_board.addMessage(msg);
+		Sound sound = new Sound("enemyKilled");
+		sound.play();
 	}
 	
 	

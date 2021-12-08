@@ -8,6 +8,7 @@ import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Characters;
 import uet.oop.bomberman.GameExeption.LoadLevelException;
 import uet.oop.bomberman.Level.LoadFileLevel;
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Render;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.Input.InputKeyboard;
@@ -116,6 +117,8 @@ public class GameBoard implements Render {
 	public void endGame() {
 		_screenToShow = 1;
 		_gameLoop.resetScreenDelay();
+		Sound end = new Sound("gameOver");
+		end.play();
 		_gameLoop.pause();
 	}
 

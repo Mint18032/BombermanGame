@@ -14,24 +14,22 @@ public class Frame extends JFrame {
 	private GameLoop _gameLoop;
 
 	public Frame() {
-		
 		_containerpane = new JPanel(new BorderLayout());
 		_gamepane = new GamePanel(this);
 		_infopanel = new NortificationPanel(_gamepane.getGame());
-		
+
 		_containerpane.add(_infopanel, BorderLayout.PAGE_START);
 		_containerpane.add(_gamepane, BorderLayout.PAGE_END);
-		
+
 		_gameLoop = _gamepane.getGame();
-		
 		add(_containerpane);
-		
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);	
-		
+		setVisible(true);
+
 		_gameLoop.start();
 	}
 	
@@ -42,5 +40,5 @@ public class Frame extends JFrame {
 	public void setPoints(int points) {
 		_infopanel.setPoints(points);
 	}
-	
+
 }
