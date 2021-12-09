@@ -4,11 +4,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím
+ * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím.
  */
 public class InputKeyboard implements KeyListener {
 	
-	private boolean[] keys = new boolean[120]; //120 is enough to this game
+	private boolean[] keys = new boolean[120];//Có thể thay đổi nhiều hơn
 	public boolean up, down, left, right, space, paused, resume;
 	
 	public void update() {

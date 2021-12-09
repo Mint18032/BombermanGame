@@ -2,6 +2,9 @@ package uet.oop.bomberman.Level;
 
 import uet.oop.bomberman.GameLoop;
 
+/**
+ * Chuyển đỏi từ kích thước vật thể tương đương với mỗi ô là 1 đơn vị tọa độ.
+ */
 public class Coordinates {
 	
 	public static int pixelToTile(double i) {

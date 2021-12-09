@@ -5,6 +5,9 @@ import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.Level.Coordinates;
 
+/**
+ * Gạch.
+ */
 public class Brick extends DestroyableObject {
 	
 	public Brick(int x, int y, Sprite sprite) {

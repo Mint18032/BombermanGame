@@ -8,7 +8,7 @@ import uet.oop.bomberman.GameExeption.LoadLevelException;
  */
 public abstract class LoadLevel {
 
-	protected int _width = 20, _height = 20; // default values just for testing
+	protected int _width = 20, _height = 20;
 	protected int _level;
 	protected GameBoard _Game_board;
 

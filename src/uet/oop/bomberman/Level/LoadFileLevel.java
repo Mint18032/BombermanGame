@@ -116,7 +116,6 @@ public class LoadFileLevel extends LoadLevel {
                         _Game_board.addCharacter(new Doll(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + GameLoop.TILES_SIZE, _Game_board));
                         _Game_board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                         break;
-                    // Thêm oneal
                     // Thêm BomItem            
                     case 'b':
                         LayerEntity layer = new LayerEntity(x, y,

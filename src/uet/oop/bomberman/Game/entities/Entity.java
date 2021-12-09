@@ -5,6 +5,9 @@ import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.Level.Coordinates;
 
+/**
+ * Thực thể, Cơ bản của tất cả các đối tượng trên Game.
+ */
 public abstract class Entity implements Render {
 
 	protected double _x, _y;

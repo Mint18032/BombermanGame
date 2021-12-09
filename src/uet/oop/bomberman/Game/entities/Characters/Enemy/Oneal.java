@@ -1,18 +1,23 @@
 package uet.oop.bomberman.Game.entities.Characters.Enemy;
 
 
-import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.AutoMove.AMNormal;
+import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.util.Random;
+
 public class Oneal extends Enemy {
+	private Random random = new Random();
 	public Oneal(int x, int y, GameBoard gameBoard) {
-		super(x, y, gameBoard, Sprite.balloom_dead, 0.8 , 100);
+		super(x, y, gameBoard, Sprite.doll_dead, 0.8 , 100);
 		
 		_sprite = Sprite.balloom_left1;
 		
 		_AM = new AMNormal();
 		_direction = _AM.calculateDirection();
+		this._speed += random.nextDouble()/2; //Random speed
+                
 	}
 	
 	@Override

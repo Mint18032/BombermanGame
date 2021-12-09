@@ -6,7 +6,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.Level.Coordinates;
 
 /**
- * Entity cố định, không di chuyển
+ * Entity cố định, không di chuyển.
  */
 public abstract class StandObjects extends Entity {
 	
@@ -17,13 +17,11 @@ public abstract class StandObjects extends Entity {
 	}
 
 	/**
-	 * Mặc định không cho bất cứ một đối tượng nào đi qua
-	 * @param e
-	 * @return
+	 * Mặc định không cho bất cứ một đối tượng nào đi qua.
 	 */
 	@Override
 	public boolean collide(Entity e) {
-		return false;//khong cho di qua
+		return false;//Không cho đi qua.
 	}
 	
 	@Override

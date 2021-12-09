@@ -43,7 +43,7 @@ public class GameBoard implements Render {
 		_input = input;
 		_screen = screen;
 		
-		loadLevel(1); //start at level 1
+		loadLevel(1); //Bắt đầu từ level 1
 	}
 	
 	@Override
@@ -62,15 +62,57 @@ public class GameBoard implements Render {
 		}
 	}
 
+	//Cập nhật các đối tượng trong danh sách.
+	protected void updateEntities() {
+		if( _gameLoop.isPaused() ) return;
+		for (int i = 0; i < _entities.length; i++) {
+			_entities[i].update();
+		}
+	}
+
+	//Cập nhật nhân vật.
+	protected void updateCharacters() {
+		if( _gameLoop.isPaused() ) return;
+		Iterator<Characters> itr = _characters.iterator();
+
+		while(itr.hasNext() && !_gameLoop.isPaused())
+			itr.next().update();
+	}
+
+	//Cập nhật Bom.
+	protected void updateBombs() {
+		if( _gameLoop.isPaused() ) return;
+		Iterator<Bomb> itr = _bombs.iterator();
+
+		while(itr.hasNext())
+			itr.next().update();
+	}
+
+	//Cập nhật thông báo thêm điểm sao khi giết Ennemy.
+	protected void updateMessages() {
+		if( _gameLoop.isPaused() ) return;
+		Nortification m;
+		int left;
+		for (int i = 0; i < _nortifications.size(); i++) {
+			m = _nortifications.get(i);
+			left = m.getDuration();
+
+			if(left > 0)
+				m.setDuration(--left);
+			else
+				_nortifications.remove(i);
+		}
+	}
+
 	@Override
 	public void render(Screen screen) {
 		if( _gameLoop.isPaused() ) return;
 		
-		//only render the visible part of screen
+		//Chỉ render trong phần màn hình có thể thấy được
 		int x0 = Screen.xOffset >> 4; //tile precision, -> left X
 		int x1 = (Screen.xOffset + screen.getWidth() + GameLoop.TILES_SIZE) / GameLoop.TILES_SIZE; // -> right X
 		int y0 = Screen.yOffset >> 4;
-		int y1 = (Screen.yOffset + screen.getHeight()) / GameLoop.TILES_SIZE; //render one tile plus to fix black margins
+		int y1 = (Screen.yOffset + screen.getHeight()) / GameLoop.TILES_SIZE; //Render thêm cột mỗi lần vượt màn hình
 		
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
@@ -82,7 +124,36 @@ public class GameBoard implements Render {
 		renderCharacter(screen);
 		
 	}
-	
+
+	//Khởi tạo Nhân vật.
+	protected void renderCharacter(Screen screen) {
+		Iterator<Characters> itr = _characters.iterator();
+
+		while(itr.hasNext())
+			itr.next().render(screen);
+	}
+
+	//Khởi tạo Bom.
+	protected void renderBombs(Screen screen) {
+		Iterator<Bomb> itr = _bombs.iterator();
+
+		while(itr.hasNext())
+			itr.next().render(screen);
+	}
+
+	//Khởi tạo thông báo trên màn hình.
+	public void renderMessages(Graphics g) {
+		Nortification m;
+		for (int i = 0; i < _nortifications.size(); i++) {
+			m = _nortifications.get(i);
+
+			g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
+			g.setColor(m.getColor());
+			g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * GameLoop.SCALE, (int)m.getY());
+		}
+	}
+
+	//Xử lí level
 	public void nextLevel() {
                 GameLoop.setBombRadius(1);
                 GameLoop.setBombRate(1);
@@ -108,7 +179,8 @@ public class GameBoard implements Render {
 			endGame();
 		}
 	}
-	
+
+	//Hết thời gian -> endGame()
 	protected void detectEndGame() {
 		if(_time <= 0)
 			endGame();
@@ -122,7 +194,7 @@ public class GameBoard implements Render {
 		_gameLoop.pause();
 	}
 
-	public boolean detectNoEnemies() {// phat hien enemies
+	public boolean detectNoEnemies() {// Phát hiện Enemy trên sân
 		int total = 0;
 		for (int i = 0; i < _characters.size(); i++) {
 			if(_characters.get(i) instanceof Bomber == false)
@@ -145,7 +217,8 @@ public class GameBoard implements Render {
 				break;
 		}
 	}
-	
+
+	//Xác định vị trí các phần tử như bom và vụ nổ
 	public Entity getEntity(double x, double y, Characters m) {
 		
 		Entity res = null;
@@ -167,7 +240,8 @@ public class GameBoard implements Render {
 	public List<Bomb> getBombs() {
 		return _bombs;
 	}
-	
+
+	//Xác định vị trí Bom.
 	public Bomb getBombAt(double x, double y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
@@ -193,7 +267,8 @@ public class GameBoard implements Render {
 		
 		return null;
 	}
-	
+
+	//Xác định nhân vật được loại bỏ tại vị trí.
 	public Characters getCharacterAtExcluding(int x, int y, Characters a) {
 		Iterator<Characters> itr = _characters.iterator();
 		
@@ -212,7 +287,8 @@ public class GameBoard implements Render {
 		
 		return null;
 	}
-	
+
+	//Xác định vị trí của vụ nổ.
 	public FlameSegment getFlameSegmentAt(int x, int y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
@@ -227,7 +303,8 @@ public class GameBoard implements Render {
 		
 		return null;
 	}
-	
+
+	//Xác định thực thể tại vị trí.
 	public Entity getEntityAt(double x, double y) {
 		return _entities[(int)x + (int)y * _Load_level.getWidth()];
 	}
@@ -248,68 +325,9 @@ public class GameBoard implements Render {
 		_nortifications.add(e);
 	}
 
-	protected void renderCharacter(Screen screen) {
-		Iterator<Characters> itr = _characters.iterator();
-		
-		while(itr.hasNext())
-			itr.next().render(screen);
-	}
+
 	
-	protected void renderBombs(Screen screen) {
-		Iterator<Bomb> itr = _bombs.iterator();
-		
-		while(itr.hasNext())
-			itr.next().render(screen);
-	}
-	
-	public void renderMessages(Graphics g) {
-		Nortification m;
-		for (int i = 0; i < _nortifications.size(); i++) {
-			m = _nortifications.get(i);
-			
-			g.setFont(new Font("Arial", Font.PLAIN, m.getSize()));
-			g.setColor(m.getColor());
-			g.drawString(m.getMessage(), (int)m.getX() - Screen.xOffset  * GameLoop.SCALE, (int)m.getY());
-		}
-	}
-	
-	protected void updateEntities() {
-		if( _gameLoop.isPaused() ) return;
-		for (int i = 0; i < _entities.length; i++) {
-			_entities[i].update();
-		}
-	}
-	
-	protected void updateCharacters() {
-		if( _gameLoop.isPaused() ) return;
-		Iterator<Characters> itr = _characters.iterator();
-		
-		while(itr.hasNext() && !_gameLoop.isPaused())
-			itr.next().update();
-	}
-	
-	protected void updateBombs() {
-		if( _gameLoop.isPaused() ) return;
-		Iterator<Bomb> itr = _bombs.iterator();
-		
-		while(itr.hasNext())
-			itr.next().update();
-	}
-	
-	protected void updateMessages() {
-		if( _gameLoop.isPaused() ) return;
-		Nortification m;
-		int left;
-		for (int i = 0; i < _nortifications.size(); i++) {
-			m = _nortifications.get(i);
-			left = m.getDuration();
-			
-			if(left > 0) 
-				m.setDuration(--left);
-			else
-				_nortifications.remove(i);
-		}
-	}
+
 
 	public int subtractTime() {
 		if(_gameLoop.isPaused())

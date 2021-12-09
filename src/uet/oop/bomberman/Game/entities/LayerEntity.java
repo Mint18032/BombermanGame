@@ -5,6 +5,10 @@ import uet.oop.bomberman.graphics.Screen;
 
 import java.util.LinkedList;
 
+
+/**
+ * Chứa nhiều Entity trên cùng một vị trí.
+ */
 public class LayerEntity extends Entity {
 	
 	protected LinkedList<Entity> _entities = new LinkedList<>();
