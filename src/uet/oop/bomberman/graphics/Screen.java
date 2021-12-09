@@ -4,6 +4,7 @@ import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
+import uet.oop.bomberman.Sound.Sound;
 
 import java.awt.*;
 
@@ -110,6 +111,27 @@ public class Screen {
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (GameLoop.TILES_SIZE * 2) * GameLoop.SCALE, g);
 	}
 
+	/**
+	 * Màn Hình endGame.
+	 */
+	public void drawWinGame(Graphics g, int points) {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, getRealWidth(), getRealHeight());
+
+		Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
+		g.setFont(font);
+		g.setColor(Color.white);
+		drawCenteredString("YOU WIN!", getRealWidth(), getRealHeight(), g);
+
+		font = new Font("Arial", Font.PLAIN, 10 * GameLoop.SCALE);
+		g.setFont(font);
+		g.setColor(Color.yellow);
+		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (GameLoop.TILES_SIZE * 2) * GameLoop.SCALE, g);
+
+		// TODO: chuyển 2 dòng này tới hàm win game khác.
+		Sound win = new Sound("winGame");
+		win.play();
+	}
 
 	/**
 	 * Màn hình đổi level.
@@ -122,7 +144,6 @@ public class Screen {
 		g.setFont(font);
 		g.setColor(Color.white);
 		drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
-		
 	}
 
 	/**

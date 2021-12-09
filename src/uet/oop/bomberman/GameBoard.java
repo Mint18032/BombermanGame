@@ -215,6 +215,9 @@ public class GameBoard implements Render {
 			case 3:
 				_screen.drawPaused(g);
 				break;
+			case 4:
+				_screen.drawWinGame(g, _points);
+				break;
 		}
 	}
 
@@ -324,10 +327,6 @@ public class GameBoard implements Render {
 	public void addMessage(Nortification e) {
 		_nortifications.add(e);
 	}
-
-
-	
-
 
 	public int subtractTime() {
 		if(_gameLoop.isPaused())
