@@ -33,7 +33,7 @@ public class Flame extends Entity {
 	 */
 	private void createFlameSegments() {
 //		Tính toán độ dài Flame, tương ứng với số lượng segment
-//		_flameSegments = new FlameSegment[calculatePermitedDistance()];
+		_flameSegments = new FlameSegment[calculatePermitedDistance()];
 
 		boolean last = false; // Đánh dấu segment cuối cùng.
 		
@@ -67,9 +67,9 @@ public class Flame extends Entity {
 			
 			Entity a = _Game_board.getEntity(x, y, null);
 			
-			if(a instanceof Bomb) ++radius; //explosion has to be below the bom
+			if(a instanceof Bomb) ++radius; // Nổ phải ở dưới bom.
 			
-			if(a.collide(this) == false) //cannot pass thru
+			if(a.collide(this) == false) // Không thể đi qua.
 				break;
 			
 			++radius;

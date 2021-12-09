@@ -59,10 +59,10 @@ public abstract class Enemy extends Characters {
 	@Override
 	public void render(Screen screen) {
 		
-		if(_alive)
+		if (_alive)
 			chooseSprite();
 		else {
-			if(_timeAfter > 0) {
+			if (_timeAfter > 0) {
 				_sprite = _deadSprite;
 				_animate = 0;
 			} else {
@@ -80,17 +80,17 @@ public abstract class Enemy extends Characters {
 	@Override
 	public void calculateMove() {
 		int xa = 0, ya = 0;
-		if(_steps <= 0){
+		if (_steps <= 0){
 			_direction = _AM.calculateDirection();
 			_steps = MAX_STEPS;
 		}
 			
-		if(_direction == 0) ya--; 
-		if(_direction == 2) ya++;
-		if(_direction == 3) xa--;
-		if(_direction == 1) xa++;
+		if (_direction == 0) ya--;
+		if (_direction == 2) ya++;
+		if (_direction == 3) xa--;
+		if (_direction == 1) xa++;
 		
-		if(canMove(xa, ya)) {
+		if (canMove(xa, ya)) {
 			_steps -= 1 + rest;
 			move(xa * _speed, ya * _speed);
 			_moving = true;
@@ -111,10 +111,10 @@ public abstract class Enemy extends Characters {
 	public boolean canMove(double x, double y) {
 		double xr = _x, yr = _y - 16; // Giảm y để kết quả chính xác hơn, tránh việc trùng hình.
 
-		if(_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; } 
-		if(_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
-		if(_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
-		if(_direction == 3) { xr += _sprite.getSize() -1; yr += _sprite.getSize()/2;}
+		if (_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; }
+		if (_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
+		if (_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
+		if (_direction == 3) { xr += _sprite.getSize() -1; yr += _sprite.getSize()/2;}
 		
 		int xx = Coordinates.pixelToTile(xr) +(int)x;
 		int yy = Coordinates.pixelToTile(yr) +(int)y;
@@ -145,7 +145,7 @@ public abstract class Enemy extends Characters {
 	 */
 	@Override
 	public void kill() {
-		if(!_alive) return;
+		if (!_alive) return;
 		_alive = false;
 		
 		_Game_board.addPoints(_points);
@@ -161,9 +161,9 @@ public abstract class Enemy extends Characters {
 	 */
 	@Override
 	protected void afterKill() {
-		if(_timeAfter > 0) --_timeAfter;
+		if (_timeAfter > 0) --_timeAfter;
 		else {
-			if(_finalAnimation > 0) --_finalAnimation;
+			if (_finalAnimation > 0) --_finalAnimation;
 			else
 				remove();
 		}
