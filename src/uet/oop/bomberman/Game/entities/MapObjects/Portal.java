@@ -3,6 +3,7 @@ package uet.oop.bomberman.Game.entities.MapObjects;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
+import uet.oop.bomberman.Sound.Sound;
 import uet.oop.bomberman.graphics.Sprite;
 
 /**
