@@ -114,7 +114,7 @@ public class Screen {
 	public void drawPaused(Graphics g) {
 		Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
 		g.setFont(font);
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		drawCenteredString("PAUSED", getRealWidth(), getRealHeight(), g);
 		
 	}

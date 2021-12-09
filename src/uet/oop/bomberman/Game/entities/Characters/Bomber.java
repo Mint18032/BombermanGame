@@ -44,19 +44,8 @@ public class Bomber extends Characters {
         if (_timeBetweenPutBombs < -7500) _timeBetweenPutBombs = 0;
         else _timeBetweenPutBombs--;
 
-        if (_input.paused) {
-            _Game_board.pauseGame();
-        }
-
-        if (_input.resume) {
-            _Game_board.resume();
-        }
-
-
         animate();
-
         calculateMove();
-
         detectPlaceBomb();
     }
 

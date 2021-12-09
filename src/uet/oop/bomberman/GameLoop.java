@@ -109,6 +109,15 @@ public class GameLoop extends Canvas {
 
 	private void update() {
 		_input.update();
+
+		if (_input.paused) {
+			pauseGame();
+		}
+
+		if (_input.resume) {
+			resume();
+		}
+
 		_Game_board.update();
 	}
 	
@@ -197,6 +206,19 @@ public class GameLoop extends Canvas {
 
 	public void pause() {
 		_paused = true;
+	}
+
+	public void pauseGame() {
+		_Game_board.setShow(3);
+		resetScreenDelay();
+		_paused = true;
+	}
+
+	public void resume() {
+		if(!_paused) return;
+		_Game_board.setShow(-1);
+		resetScreenDelay();
+		_paused = false;
 	}
 
 	public static void setBombRate(int bombRate) {

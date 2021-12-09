@@ -122,18 +122,6 @@ public class GameBoard implements Render {
 		_gameLoop.pause();
 	}
 
-	public void resume() {
-		if(_gameLoop.isPaused()) return;
-		_screenToShow = -1;
-		_gameLoop.resetScreenDelay();
-	}
-
-	public void pauseGame() {
-		_screenToShow = 3;
-		_gameLoop.resetScreenDelay();
-		_gameLoop.pause();
-	}
-
 	public boolean detectNoEnemies() {// phat hien enemies
 		int total = 0;
 		for (int i = 0; i < _characters.size(); i++) {
