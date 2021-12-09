@@ -6,7 +6,6 @@ import java.io.File;
 public class Sound {
     public static Boolean muted = false;
     private String usage;
-    private Boolean isPlaying = false;
     private File file;
     private Clip clip;
 
@@ -39,12 +38,10 @@ public class Sound {
         } else {
             clip.start();
         }
-        isPlaying = true;
     }
 
     public void stop() {
         clip.stop();
-        isPlaying = false;
     }
 
     public static void mute() {
@@ -53,9 +50,5 @@ public class Sound {
 
     public static void unmute() {
         muted = false;
-    }
-
-    public boolean getIsPlaying() {
-        return this.isPlaying;
     }
 }

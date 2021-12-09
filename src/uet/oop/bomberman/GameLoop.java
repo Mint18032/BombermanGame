@@ -118,6 +118,16 @@ public class GameLoop extends Canvas {
 			resume();
 		}
 
+		if (_input.mute) {
+			if (!Sound.muted) {
+				Sound.mute();
+				music.stop();
+			}
+		} else if (_input.unmute) {
+			Sound.unmute();
+			music.play();
+		}
+
 		_Game_board.update();
 	}
 	

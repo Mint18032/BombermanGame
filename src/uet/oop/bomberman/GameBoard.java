@@ -84,9 +84,9 @@ public class GameBoard implements Render {
 	}
 	
 	public void nextLevel() {
-                GameLoop.setBombRadius(1);
-                GameLoop.setBombRate(1);
-                GameLoop.setBomberSpeed(1.0);
+		GameLoop.setBombRadius(1);
+		GameLoop.setBombRate(1);
+		GameLoop.setBomberSpeed(1.0);
 		loadLevel(_Load_level.getLevel() + 1);
 	}
 	

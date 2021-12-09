@@ -8,8 +8,8 @@ import java.awt.event.KeyListener;
  */
 public class InputKeyboard implements KeyListener {
 	
-	private boolean[] keys = new boolean[120]; //120 is enough to this game
-	public boolean up, down, left, right, space, paused, resume;
+	private boolean[] keys = new boolean[120];
+	public boolean up, down, left, right, space, paused, resume, mute, unmute;
 	
 	public void update() {
 		up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
@@ -19,6 +19,8 @@ public class InputKeyboard implements KeyListener {
 		space = keys[KeyEvent.VK_SPACE] || keys[KeyEvent.VK_X];
 		paused = keys[KeyEvent.VK_P];
 		resume = keys[KeyEvent.VK_R];
+		mute = keys[KeyEvent.VK_M];
+		unmute = keys[KeyEvent.VK_U];
 	}
 
 	@Override
