@@ -9,10 +9,7 @@ import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.AutoMove.AMEnemy;
 import uet.oop.bomberman.graphics.Sprite;
 
-/**
- *
- * @author TUNG318
- */
+
 public class Doll extends Enemy{
 
     public Doll(int x, int y, GameBoard gameBoard) {
@@ -22,7 +19,6 @@ public class Doll extends Enemy{
 
         _AM = new AMEnemy(_Game_board.getBomber(), this);
         _direction = _AM.calculateDirection();
-
     }
 
     @Override

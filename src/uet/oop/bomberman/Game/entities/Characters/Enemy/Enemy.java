@@ -73,10 +73,13 @@ public abstract class Enemy extends Characters {
 			
 		screen.renderEntity((int)_x, (int)_y - _sprite.SIZE, this);
 	}
-	
+
+	/**
+	 * Tính toán bước di chuyển.
+	 */
 	@Override
 	public void calculateMove() {
-                int xa = 0, ya = 0;
+		int xa = 0, ya = 0;
 		if(_steps <= 0){
 			_direction = _AM.calculateDirection();
 			_steps = MAX_STEPS;
@@ -106,10 +109,8 @@ public abstract class Enemy extends Characters {
 	
 	@Override
 	public boolean canMove(double x, double y) {
-		double xr = _x, yr = _y - 16; //subtract y to get more accurate results
-		
-		//the thing is, subract 15 to 16 (sprite size), so if we add 1 tile we get the next pixel tile with this
-		//we avoid the shaking inside tiles with the help of steps
+		double xr = _x, yr = _y - 16; // Giảm y để kết quả chính xác hơn, tránh việc trùng hình.
+
 		if(_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; } 
 		if(_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
 		if(_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
@@ -118,24 +119,30 @@ public abstract class Enemy extends Characters {
 		int xx = Coordinates.pixelToTile(xr) +(int)x;
 		int yy = Coordinates.pixelToTile(yr) +(int)y;
 		
-		Entity a = _Game_board.getEntity(xx, yy, this); //entity of the position we want to go
+		Entity a = _Game_board.getEntity(xx, yy, this); // Entity tại vị trí đích.
 		
 		return a.collide(this);
 	}
 
+	/**
+	 * Xử lý va chạm.
+	 */
 	@Override
 	public boolean collide(Entity e) {
-		if(e instanceof Flame){
-                    this.kill();
-                    return false;
-                }
-                if(e instanceof Bomber){
-                    ((Bomber) e).kill();
-                    return false;
-                }
+		if (e instanceof Flame) {
+			this.kill();
+			return false;
+		}
+		if (e instanceof Bomber) {
+			((Bomber) e).kill();
+			return false;
+		}
 		return true;
 	}
-	
+
+	/**
+	 * Bị tiêu diệt.
+	 */
 	@Override
 	public void kill() {
 		if(!_alive) return;
@@ -148,8 +155,10 @@ public abstract class Enemy extends Characters {
 		Sound sound = new Sound("enemyKilled");
 		sound.play();
 	}
-	
-	
+
+	/**
+	 * Hiệu ứng khi bị tiêu diệt.
+	 */
 	@Override
 	protected void afterKill() {
 		if(_timeAfter > 0) --_timeAfter;
@@ -159,6 +168,9 @@ public abstract class Enemy extends Characters {
 				remove();
 		}
 	}
-	
+
+	/**
+	 * Chọn hình để hiện theo hướng di chuyển.
+	 */
 	protected abstract void chooseSprite();
 }

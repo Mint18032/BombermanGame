@@ -5,6 +5,9 @@ import uet.oop.bomberman.GameLoop;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Thanh hiển thị thời gian và số điểm trong game.
+ */
 public class NortificationPanel extends JPanel {
 	
 	private JLabel timeLabel;

@@ -43,7 +43,7 @@ public class GameBoard implements Render {
 		_input = input;
 		_screen = screen;
 		
-		loadLevel(1); //start in level 1
+		loadLevel(1); //start at level 1
 	}
 	
 	@Override

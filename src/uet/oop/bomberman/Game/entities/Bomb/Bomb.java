@@ -10,6 +10,10 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.Game.entities.Characters.Characters;
 import uet.oop.bomberman.Level.Coordinates;
 import uet.oop.bomberman.Sound.Sound;
+
+/**
+ * Class kiểm soát bom.
+ */
 public class Bomb extends Animation {
 
 	protected double _timeToExplode = 120; //2 seconds - thoi gian phat no
@@ -19,7 +23,13 @@ public class Bomb extends Animation {
 	protected Flame[] _flames;
 	protected boolean _exploded = false;
 	protected boolean _allowedToPassThru = true;
-	 
+
+	/**
+	 * Constructor.
+	 * @param x hoành độ.
+	 * @param y tung độ.
+	 * @param gameBoard hiện tại.
+	 */
 	public Bomb(int x, int y, GameBoard gameBoard) {
 		_x = x;
 		_y = y;
@@ -28,7 +38,10 @@ public class Bomb extends Animation {
 		sound = new Sound("placeBomb");
 		sound.play();
 	}
-	
+
+	/**
+	 * Cập nhật.
+	 */
 	@Override
 	public void update() {
 		if(_timeToExplode > 0) 
@@ -47,7 +60,10 @@ public class Bomb extends Animation {
 			
 		animate();
 	}
-	
+
+	/**
+	 * Vẽ.
+	 */
 	@Override
 	public void render(Screen screen) {
 		if(_exploded) {
@@ -91,9 +107,11 @@ public class Bomb extends Animation {
 		sound.setUsage("explosion");
 		sound.play();
 	}
-        public void time_explode() {
+
+    public void time_explode() {
 		_timeToExplode = 0;
 	}
+
 	public FlameSegment flameAt(int x, int y) {
 		if(!_exploded) return null;
 		
@@ -106,6 +124,9 @@ public class Bomb extends Animation {
 		return null;
 	}
 
+	/**
+	 * Xử lý va chạm.
+	 */
 	@Override
 	public boolean collide(Entity e) {
         
@@ -113,16 +134,19 @@ public class Bomb extends Animation {
 			double diffX = e.getX() - Coordinates.tileToPixel(getX());
 			double diffY = e.getY() - Coordinates.tileToPixel(getY());
 			
-			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) { // differences to see if the player has moved out of the bomb, tested values
+			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) {
+				// khoảng cách để xác định xem bomber có trong vùng quả bom không.
 				_allowedToPassThru = false;
 			}
 			
 			return _allowedToPassThru;
 		}
+
 		if(e instanceof Flame ) {
 			time_explode();
 			return true;
 		}
+
 		return false;
 	}
 }

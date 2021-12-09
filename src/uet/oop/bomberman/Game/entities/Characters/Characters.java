@@ -6,7 +6,7 @@ import uet.oop.bomberman.Game.entities.Animation;
 import uet.oop.bomberman.graphics.Screen;
 
 /**
- * Bao gồm Bomber và Enemy
+ * Nhân vật (bao gồm Bomber và Enemy).
  */
 public abstract class Characters extends Animation {
 	
@@ -36,15 +36,18 @@ public abstract class Characters extends Animation {
 	protected abstract void move(double xa, double ya);
 
 	/**
-	 * Được gọi khi đối tượng bị tiêu diệt
+	 * Được gọi khi đối tượng bị tiêu diệt.
 	 */
 	public abstract void kill();
 
 	/**
-	 * Xử lý hiệu ứng bị tiêu diệt
+	 * Xử lý hiệu ứng bị tiêu diệt.
 	 */
 	protected abstract void afterKill();
 
+	/**
+	 * Xác định bước đi tới vị trí x, y có hợp lệ hay không.
+	 */
 	protected abstract boolean canMove(double x, double y);
 
 	protected double getXMessage() {

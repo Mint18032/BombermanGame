@@ -6,7 +6,6 @@ import uet.oop.bomberman.Game.entities.Characters.Enemy.AutoMove.AMNormal;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Oneal extends Enemy {
-	//private Random random = new Random();
 	public Oneal(int x, int y, GameBoard gameBoard) {
 		super(x, y, gameBoard, Sprite.balloom_dead, 0.8 , 100);
 		
@@ -14,8 +13,6 @@ public class Oneal extends Enemy {
 		
 		_AM = new AMNormal();
 		_direction = _AM.calculateDirection();
-                //this._speed += random.nextDouble()/2;
-                
 	}
 	
 	@Override

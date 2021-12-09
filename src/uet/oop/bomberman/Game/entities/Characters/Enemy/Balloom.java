@@ -6,7 +6,6 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloom extends Enemy {
 	
-	
 	public Balloom(int x, int y, GameBoard gameBoard) {
 		super(x, y, gameBoard, Sprite.balloom_dead, 0.5, 100);
 		
@@ -17,6 +16,9 @@ public class Balloom extends Enemy {
                 
 	}
 
+	/**
+	 * Chọn hình để hiện theo hướng di chuyển.
+	 */
 	@Override
 	protected void chooseSprite() {
 		switch(_direction) {

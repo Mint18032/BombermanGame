@@ -6,7 +6,9 @@ import uet.oop.bomberman.Game.entities.Characters.Enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 
-
+/**
+ * Các Segment của Flame.
+ */
 public class FlameSegment extends Entity {
 
 	protected boolean _last;
@@ -61,10 +63,8 @@ public class FlameSegment extends Entity {
 
 	@Override
 	public boolean collide(Entity e) {
-            if(e instanceof Bomber) ((Bomber) e).kill();
-            if(e instanceof Enemy) ((Enemy) e).kill();
+		if(e instanceof Bomber) ((Bomber) e).kill();
+		if(e instanceof Enemy) ((Enemy) e).kill();
 		return true;
 	}
-	
-
 }

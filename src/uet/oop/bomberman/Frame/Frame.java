@@ -5,6 +5,9 @@ import uet.oop.bomberman.GameLoop;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Frame riêng cho game.
+ */
 public class Frame extends JFrame {
 	
 	public GamePanel _gamepane;

@@ -68,7 +68,7 @@ public class Bomber extends Characters {
     }
 
     /**
-     * Kiểm tra xem có đặt được bom hay không? nếu có thì đặt bom tại vị trí hiện tại của Bomber
+     * Kiểm tra xem có đặt được bom hay không, nếu có thì đặt bom tại vị trí hiện tại của Bomber.
      */
     private void detectPlaceBomb() {
         if(_input.space && GameLoop.getBombRate() > 0 && _timeBetweenPutBombs < 0) {
@@ -83,6 +83,9 @@ public class Bomber extends Characters {
 		}
     }
 
+    /**
+     * Đặt bom tại tọa độ x, y.
+     */
     protected void placeBomb(int x, int y) {
         Bomb b = new Bomb(x, y, _Game_board);
         _Game_board.addBomb(b);
@@ -116,6 +119,9 @@ public class Bomber extends Characters {
         }
     }
 
+    /**
+     * Tính toán tọa độ di chuyển.
+     */
     @Override
     protected void calculateMove() {
         int xa = 0, ya = 0;
@@ -132,6 +138,9 @@ public class Bomber extends Characters {
 		}
     }
 
+    /**
+     * Xác định xem bomber có thể di chuyển tới vị trí có tọa độ x, y hay không.
+     */
     @Override
     public boolean canMove(double x, double y) {
        for (int c = 0; c < 4; c++) { //colision detection for each corner of the player
@@ -145,9 +154,11 @@ public class Bomber extends Characters {
 		}
 		
 		return true;
-        //return false;
     }
 
+    /**
+     * Di chuyển nhân vật đến vị trí có tọa độ xa, ya nếu hợp lệ.
+     */
     @Override
     public void move(double xa, double ya) {
         if(xa > 0) _direction = 1;
@@ -155,7 +166,7 @@ public class Bomber extends Characters {
 		if(ya > 0) _direction = 2;
 		if(ya < 0) _direction = 0;
 		
-		if(canMove(0, ya)) { //separate the moves for the player can slide when is colliding
+		if(canMove(0, ya)) {
 			_y += ya;
 		}
 		
@@ -164,51 +175,61 @@ public class Bomber extends Characters {
 		}
     }
 
+    /**
+     * Xử lý va chạm.
+     */
     @Override
     public boolean collide(Entity e) {
-        if(e instanceof Flame){
+        if (e instanceof Flame) {
             this.kill();
             return false;
         }
-        if(e instanceof Enemy){
+        if (e instanceof Enemy) {
             this.kill();
             return true;
         }
-        if( e instanceof LayerEntity) return(e.collide(this));
+        if (e instanceof LayerEntity) return(e.collide(this));
         return true;
     }
 
-    //sprite
+    /**
+     * Thay đổi Sprite ứng với hoạt động, hướng đi của nhân vật.
+     */
     private void chooseSprite() {
         switch (_direction) {
             case 0:
-                _sprite = Sprite.player_up;
                 if (_moving) {
                     _sprite = Sprite.movingSprite(Sprite.player_up_1, Sprite.player_up_2, _animate, 20);
+                } else {
+                    _sprite = Sprite.player_up;
                 }
                 break;
             case 1:
-                _sprite = Sprite.player_right;
                 if (_moving) {
                     _sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, _animate, 20);
+                } else {
+                    _sprite = Sprite.player_right;
                 }
                 break;
             case 2:
-                _sprite = Sprite.player_down;
                 if (_moving) {
                     _sprite = Sprite.movingSprite(Sprite.player_down_1, Sprite.player_down_2, _animate, 20);
+                } else {
+                    _sprite = Sprite.player_down;
                 }
                 break;
             case 3:
-                _sprite = Sprite.player_left;
                 if (_moving) {
                     _sprite = Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, _animate, 20);
+                } else {
+                    _sprite = Sprite.player_left;
                 }
                 break;
             default:
-                _sprite = Sprite.player_right;
                 if (_moving) {
                     _sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, _animate, 20);
+                } else {
+                    _sprite = Sprite.player_right;
                 }
                 break;
         }

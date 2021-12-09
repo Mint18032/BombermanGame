@@ -6,6 +6,9 @@ import uet.oop.bomberman.Game.entities.Characters.Bomber;
 import uet.oop.bomberman.Game.entities.Characters.Enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 
+/**
+ * Flame: mô phỏng các vết bom nổ.
+ */
 public class Flame extends Entity {
 
 	protected GameBoard _Game_board;
@@ -26,19 +29,13 @@ public class Flame extends Entity {
 	}
 
 	/**
-	 * Tạo các FlameSegment, mỗi segment ứng một đơn vị độ dài
+	 * Tạo các FlameSegment, mỗi segment ứng một đơn vị độ dài.
 	 */
 	private void createFlameSegments() {
-		/**
-		 * tính toán độ dài Flame, tương ứng với số lượng segment
-		 */
-		_flameSegments = new FlameSegment[calculatePermitedDistance()];
+//		Tính toán độ dài Flame, tương ứng với số lượng segment
+//		_flameSegments = new FlameSegment[calculatePermitedDistance()];
 
-		/**
-		 * biến last dùng để đánh dấu cho segment cuối cùng
-		 */
-
-                boolean last = false;
+		boolean last = false; // Đánh dấu segment cuối cùng.
 		
 		int x = (int)_x;
 		int y = (int)_y;
@@ -56,11 +53,10 @@ public class Flame extends Entity {
 	}
 
 	/**
-	 * Tính toán độ dài của Flame, nếu gặp vật cản là Brick/Wall, độ dài sẽ bị cắt ngắn
-	 * @return
+	 * Tính toán độ dài của Flame, nếu gặp vật cản là Brick/Wall, độ dài sẽ bị cắt ngắn.
 	 */
 	private int calculatePermitedDistance() {
-                int radius = 0;
+		int radius = 0;
 		int x = (int)_x;
 		int y = (int)_y;
 		while(radius < _radius) {
@@ -99,10 +95,13 @@ public class Flame extends Entity {
 		}
 	}
 
+	/**
+	 * Xử lý va chạm.
+	 */
 	@Override
 	public boolean collide(Entity e) {
 		if(e instanceof Bomber) ((Bomber) e).kill();
-                if(e instanceof Enemy) ((Enemy) e).kill();
-                return true;
+		if(e instanceof Enemy) ((Enemy) e).kill();
+		return true;
 	}
 }
