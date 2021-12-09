@@ -13,7 +13,7 @@ public class DestroyableObject extends StandObjects {
 	private final int MAX_ANIMATE = 7500;
 	private int _animate = 0;
 	protected boolean _destroyed = false;
-	protected int _timeToDisapear = 20;
+	protected int _timeToDisapear = 20; // Thời gian biến mất
 	protected Sprite _belowSprite = Sprite.grass;
 	
 	public DestroyableObject(int x, int y, Sprite sprite) {
@@ -44,7 +44,10 @@ public class DestroyableObject extends StandObjects {
 	public void addBelowSprite(Sprite sprite) {
 		_belowSprite = sprite;
 	}
-	
+
+	/**
+	 * Hoạt ảnh nổ Brick.
+	 */
 	protected Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2) {
 		int calc = _animate % 30;
 		

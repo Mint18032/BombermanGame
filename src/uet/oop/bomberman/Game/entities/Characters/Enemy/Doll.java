@@ -13,7 +13,7 @@ import uet.oop.bomberman.graphics.Sprite;
 public class Doll extends Enemy{
 
     public Doll(int x, int y, GameBoard gameBoard) {
-        super(x, y, gameBoard, Sprite.balloom_dead, 0.8, 100);
+        super(x, y, gameBoard, Sprite.oneal_dead, 0.8, 100);
 
         _sprite = Sprite.balloom_left1;
 

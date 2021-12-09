@@ -30,7 +30,10 @@ public class Screen {
 			_pixels[i] = 0;
 		}
 	}
-	
+
+	/**
+	 * Render Thực thể.
+	 */
 	public void renderEntity(int xp, int yp, Entity entity) { //save entity pixels
 		xp -= xOffset;
 		yp -= yOffset;
@@ -45,7 +48,10 @@ public class Screen {
 			}
 		}
 	}
-	
+
+	/** Render Thực thể dưới thực thể khác.
+	 * VD : Item dưới Brick.
+	 */
 	public void renderEntityWithBelowSprite(int xp, int yp, Entity entity, Sprite below) {
 		xp -= xOffset;
 		yp -= yOffset;
@@ -68,7 +74,8 @@ public class Screen {
 		xOffset = xO;
 		yOffset = yO;
 	}
-	
+
+	//Tính toán vị trí của Bomber.
 	public static int calculateXOffset(GameBoard gameBoard, Bomber bomber) {
 		if(bomber == null) return 0;
 		int temp = xOffset;
@@ -84,7 +91,10 @@ public class Screen {
 		
 		return temp;
 	}
-	
+
+	/**
+	 * Màn Hình endGame.
+	 */
 	public void drawEndGame(Graphics g, int points) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getRealWidth(), getRealHeight());
@@ -100,6 +110,10 @@ public class Screen {
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (GameLoop.TILES_SIZE * 2) * GameLoop.SCALE, g);
 	}
 
+
+	/**
+	 * Màn hình đổi level.
+	 */
 	public void drawChangeLevel(Graphics g, int level) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getRealWidth(), getRealHeight());
@@ -111,6 +125,9 @@ public class Screen {
 		
 	}
 
+	/**
+	 * Vẽ màn hình Paused.
+	 */
 	public void drawPaused(Graphics g) {
 		Font font = new Font("Arial", Font.PLAIN, 20 * GameLoop.SCALE);
 		g.setFont(font);
@@ -119,6 +136,9 @@ public class Screen {
 		
 	}
 
+	/**
+	 * Hiển thị chữ giữa màn hình và căn lề giữa.
+	 */
 	public void drawCenteredString(String s, int w, int h, Graphics g) {
 	    FontMetrics fm = g.getFontMetrics();
 	    int x = (w - fm.stringWidth(s)) / 2;

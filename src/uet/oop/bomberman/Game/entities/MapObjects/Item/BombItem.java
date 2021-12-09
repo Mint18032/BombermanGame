@@ -1,11 +1,13 @@
 package uet.oop.bomberman.Game.entities.MapObjects.Item;
 
-import uet.oop.bomberman.GameLoop;
-import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
+import uet.oop.bomberman.Game.entities.Entity;
+import uet.oop.bomberman.GameLoop;
 import uet.oop.bomberman.graphics.Sprite;
-import uet.oop.bomberman.Sound.Sound;
 
+/**
+ * Item tăng số lượng Bom của Bomber.
+ */
 public class BombItem extends Item {
 
 	public BombItem(int x, int y, Sprite sprite) {

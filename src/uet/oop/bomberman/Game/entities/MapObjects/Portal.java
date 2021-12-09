@@ -1,11 +1,13 @@
 package uet.oop.bomberman.Game.entities.MapObjects;
 
-import uet.oop.bomberman.GameBoard;
-import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.Game.entities.Characters.Bomber;
+import uet.oop.bomberman.Game.entities.Entity;
+import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.graphics.Sprite;
-import uet.oop.bomberman.Sound.Sound;
 
+/**
+ * Cổng dịch chuyển.
+ */
 public class Portal extends StandObjects {
 	protected GameBoard _Game_board;
 
@@ -22,7 +24,7 @@ public class Portal extends StandObjects {
 				return false;
 			
 			if(e.getXTile() == getX() && e.getYTile() == getY()) {
-				if(_Game_board.detectNoEnemies()){
+				if(_Game_board.detectNoEnemies()){// Nếu ko còn Enemy mới được qua bàn.
 					_Game_board.nextLevel();
 					Sound levelUp = new Sound("levelUp");
 					levelUp.play();

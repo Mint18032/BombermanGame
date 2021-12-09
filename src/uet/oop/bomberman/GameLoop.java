@@ -22,15 +22,15 @@ public class GameLoop extends Canvas {
 							WIDTH = TILES_SIZE * (31 / 2),
 							HEIGHT = 13 * TILES_SIZE;
 
-	public static int SCALE = 3;
+	public static int SCALE = 3; //Độ phóng so với kích thước ban đầu.
 	
-	public static final String TITLE = " ";
+	public static final String TITLE = "BOMBERMAN";
 	
-	private static final int BOMBRATE = 1;
-	private static final int BOMBRADIUS = 1;
-	private static final double BOMBERSPEED = 1.0;//toc do bomber
+	private static final int BOMBRATE = 1;//Số lượng boom
+	private static final int BOMBRADIUS = 1;//Độ lớn flame
+	private static final double BOMBERSPEED = 1.0;//Tốc độ Bomber
 	
-	public static final int TIME = 200;
+	public static final int TIME = 400;
 	public static final int POINTS = 0;
 	
 	protected static int SCREENDELAY = 3;
@@ -66,6 +66,9 @@ public class GameLoop extends Canvas {
 		music.play();
 	}
 
+	/**
+	 * Render GameBoard.
+	 */
 	private void renderGame() {
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
@@ -89,7 +92,10 @@ public class GameLoop extends Canvas {
 		g.dispose();
 		bs.show();
 	}
-	
+
+	/**
+	 * Render Graphics
+	 */
 	private void renderScreen() {
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
@@ -107,6 +113,9 @@ public class GameLoop extends Canvas {
 		bs.show();
 	}
 
+	/**
+	 * Update Game.
+	 */
 	private void update() {
 		_input.update();
 
@@ -130,16 +139,18 @@ public class GameLoop extends Canvas {
 
 		_Game_board.update();
 	}
-	
+
+	/**
+	 * Tính thời gian và fps theo thời gian thực.
+	 * Render màn hình chơi.
+	 */
 	public void start() {
 		_running = true;
 		
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
-		final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
+		final double ns = 1000000000.0 / 60.0; //nano giây, 60 frames trên giây
 		double delta = 0;
-		int frames = 0;
-		int updates = 0;
 		requestFocus();
 		while(_running) {
 			long now = System.nanoTime();
@@ -147,7 +158,6 @@ public class GameLoop extends Canvas {
 			lastTime = now;
 			while(delta >= 1) {
 				update();
-				updates++;
 				delta--;
 			}
 
@@ -163,14 +173,11 @@ public class GameLoop extends Canvas {
 				renderGame();
 			}
 
-			frames++;
 			if(System.currentTimeMillis() - timer > 1000) {
-				_frame.setTime(_Game_board.subtractTime());
+				_frame.setTime(_Game_board.subtractTime()); //Xác định thời gian trong game
 				_frame.setPoints(_Game_board.getPoints());
 				timer += 1000;
-				_frame.setTitle(TITLE + " | " + updates + " rate, " + frames + " fps");
-				updates = 0;
-				frames = 0;
+				_frame.setTitle(TITLE);
 
 				if(_Game_board.getShow() == 2)
 					--_screenDelay;

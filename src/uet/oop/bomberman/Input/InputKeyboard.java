@@ -4,13 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím
+ * Tiếp nhận và xử lý các sự kiện nhập từ bàn phím.
  */
 public class InputKeyboard implements KeyListener {
 	
-	private boolean[] keys = new boolean[120];
+	private boolean[] keys = new boolean[120];//Có thể thay đổi nhiều hơn
 	public boolean up, down, left, right, space, paused, resume, mute, unmute;
-	
+
 	public void update() {
 		up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
