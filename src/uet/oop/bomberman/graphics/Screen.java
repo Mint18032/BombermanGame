@@ -112,7 +112,7 @@ public class Screen {
 	}
 
 	/**
-	 * Màn Hình endGame.
+	 * Màn Hình thắng Game.
 	 */
 	public void drawWinGame(Graphics g, int points) {
 		g.setColor(Color.black);
@@ -127,10 +127,6 @@ public class Screen {
 		g.setFont(font);
 		g.setColor(Color.yellow);
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (GameLoop.TILES_SIZE * 2) * GameLoop.SCALE, g);
-
-		// TODO: chuyển 2 dòng này tới hàm win game khác.
-		Sound win = new Sound("winGame");
-		win.play();
 	}
 
 	/**

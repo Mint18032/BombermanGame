@@ -55,6 +55,9 @@ public class GameBoard implements Render {
 		updateBombs();
 		updateMessages();
 		detectEndGame();
+		if (_Load_level.isMaxLevel()) {
+			detectWinGame();
+		}
 		
 		for (int i = 0; i < _characters.size(); i++) {
 			Characters a = _characters.get(i);
@@ -62,7 +65,9 @@ public class GameBoard implements Render {
 		}
 	}
 
-	//Cập nhật các đối tượng trong danh sách.
+	/**
+	 * Cập nhật các đối tượng trong danh sách.
+	 */
 	protected void updateEntities() {
 		if( _gameLoop.isPaused() ) return;
 		for (int i = 0; i < _entities.length; i++) {
@@ -70,7 +75,9 @@ public class GameBoard implements Render {
 		}
 	}
 
-	//Cập nhật nhân vật.
+	/**
+	 * Cập nhật nhân vật.
+	 */
 	protected void updateCharacters() {
 		if( _gameLoop.isPaused() ) return;
 		Iterator<Characters> itr = _characters.iterator();
@@ -79,7 +86,9 @@ public class GameBoard implements Render {
 			itr.next().update();
 	}
 
-	//Cập nhật Bom.
+	/**
+	 * Cập nhật Bom.
+	 */
 	protected void updateBombs() {
 		if( _gameLoop.isPaused() ) return;
 		Iterator<Bomb> itr = _bombs.iterator();
@@ -88,7 +97,9 @@ public class GameBoard implements Render {
 			itr.next().update();
 	}
 
-	//Cập nhật thông báo thêm điểm sao khi giết Ennemy.
+	/**
+	 * Cập nhật thông báo thêm điểm sao khi giết Ennemy.
+	 */
 	protected void updateMessages() {
 		if( _gameLoop.isPaused() ) return;
 		Nortification m;
@@ -125,7 +136,9 @@ public class GameBoard implements Render {
 		
 	}
 
-	//Khởi tạo Nhân vật.
+	/**
+	 * 	Khởi tạo Nhân vật.
+	 */
 	protected void renderCharacter(Screen screen) {
 		Iterator<Characters> itr = _characters.iterator();
 
@@ -133,7 +146,9 @@ public class GameBoard implements Render {
 			itr.next().render(screen);
 	}
 
-	//Khởi tạo Bom.
+	/**
+	 * 	Khởi tạo Bom.
+	 */
 	protected void renderBombs(Screen screen) {
 		Iterator<Bomb> itr = _bombs.iterator();
 
@@ -141,7 +156,9 @@ public class GameBoard implements Render {
 			itr.next().render(screen);
 	}
 
-	//Khởi tạo thông báo trên màn hình.
+	/**
+	 * Khởi tạo thông báo trên màn hình.
+	 */
 	public void renderMessages(Graphics g) {
 		Nortification m;
 		for (int i = 0; i < _nortifications.size(); i++) {
@@ -153,7 +170,9 @@ public class GameBoard implements Render {
 		}
 	}
 
-	//Xử lí level
+	/**
+	 * Xử lí level.
+	 */
 	public void nextLevel() {
 		GameLoop.setBombRadius(1);
 		GameLoop.setBombRate(1);
@@ -180,9 +199,11 @@ public class GameBoard implements Render {
 		}
 	}
 
-	//Hết thời gian -> endGame()
+	/**
+	 * Hết thời gian -> endGame().
+	 */
 	protected void detectEndGame() {
-		if(_time <= 0)
+		if (_time <= 0)
 			endGame();
 	}
 
@@ -194,7 +215,27 @@ public class GameBoard implements Render {
 		_gameLoop.pause();
 	}
 
-	public boolean detectNoEnemies() {// Phát hiện Enemy trên sân
+	/**
+	 * Tại level cuối, nếu giết hết enemies sẽ thắng.
+	 */
+	public void detectWinGame() {
+		if (_time > 0 && detectNoEnemies()) {
+			winGame();
+		}
+	}
+
+	public void winGame() {
+		_screenToShow = 4;
+		_gameLoop.resetScreenDelay();
+		Sound win = new Sound("winGame");
+		win.play();
+		_gameLoop.pause();
+	}
+
+	/**
+	 * Phát hiện Enemy trên sân.
+	 */
+	public boolean detectNoEnemies() {
 		int total = 0;
 		for (int i = 0; i < _characters.size(); i++) {
 			if(_characters.get(i) instanceof Bomber == false)
@@ -221,7 +262,9 @@ public class GameBoard implements Render {
 		}
 	}
 
-	//Xác định vị trí các phần tử như bom và vụ nổ
+	/**
+	 * Xác định vị trí các phần tử như bom và vụ nổ.
+	 */
 	public Entity getEntity(double x, double y, Characters m) {
 		
 		Entity res = null;
@@ -244,7 +287,9 @@ public class GameBoard implements Render {
 		return _bombs;
 	}
 
-	//Xác định vị trí Bom.
+	/**
+	 * Xác định vị trí Bom.
+	 */
 	public Bomb getBombAt(double x, double y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
@@ -271,7 +316,9 @@ public class GameBoard implements Render {
 		return null;
 	}
 
-	//Xác định nhân vật được loại bỏ tại vị trí.
+	/**
+	 * Xác định nhân vật được loại bỏ tại vị trí.
+	 */
 	public Characters getCharacterAtExcluding(int x, int y, Characters a) {
 		Iterator<Characters> itr = _characters.iterator();
 		
@@ -291,7 +338,9 @@ public class GameBoard implements Render {
 		return null;
 	}
 
-	//Xác định vị trí của vụ nổ.
+	/**
+	 * Xác định vị trí của vụ nổ.
+	 */
 	public FlameSegment getFlameSegmentAt(int x, int y) {
 		Iterator<Bomb> bs = _bombs.iterator();
 		Bomb b;
@@ -307,7 +356,9 @@ public class GameBoard implements Render {
 		return null;
 	}
 
-	//Xác định thực thể tại vị trí.
+	/**
+	 * Xác định thực thể tại vị trí.
+	 */
 	public Entity getEntityAt(double x, double y) {
 		return _entities[(int)x + (int)y * _Load_level.getWidth()];
 	}

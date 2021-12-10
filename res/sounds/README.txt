@@ -4,5 +4,7 @@ Sounds directory bao gồm các files sau:
 - explosion: tiếng bom nổ.
 - claiming: ăn được Item.
 - moving: tiếng chạy của nhân vật.
-- enemykilled: giết được 1 enemy.
+- enemyKilled: giết được 1 enemy.
 - gameOver: âm thanh khi bomb chết.
+- levelUp: chuyển sang level mới.
+- winGame: thắng bàn cuối.

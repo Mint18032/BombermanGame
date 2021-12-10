@@ -10,6 +10,7 @@ public abstract class LoadLevel {
 
 	protected int _width = 20, _height = 20;
 	protected int _level;
+	protected static final int _max_level = 2;
 	protected GameBoard _Game_board;
 
 	public LoadLevel(GameBoard gameBoard, int level) throws LoadLevelException {
@@ -31,6 +32,10 @@ public abstract class LoadLevel {
 
 		public int getLevel() {
 			return _level;
+		}
+
+		public boolean isMaxLevel() {
+			return _max_level == _level;
 		}
 
 }
