@@ -1,10 +1,9 @@
 package uet.oop.bomberman.graphics;
 
+import uet.oop.bomberman.Game.entities.Characters.Bomber;
+import uet.oop.bomberman.Game.entities.Entity;
 import uet.oop.bomberman.GameBoard;
 import uet.oop.bomberman.GameLoop;
-import uet.oop.bomberman.Game.entities.Entity;
-import uet.oop.bomberman.Game.entities.Characters.Bomber;
-import uet.oop.bomberman.Sound.Sound;
 
 import java.awt.*;
 
@@ -34,6 +33,7 @@ public class Screen {
 
 	/**
 	 * Render Thực thể.
+	 * Thực thể được render từng pixel.
 	 */
 	public void renderEntity(int xp, int yp, Entity entity) { //save entity pixels
 		xp -= xOffset;
