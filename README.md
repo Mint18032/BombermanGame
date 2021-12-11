@@ -42,6 +42,7 @@ Có 2 loại Enemy trong phiên bản này:
 - Khi các Flame xuất hiện, nếu có một đối tượng thuộc loại Brick/Wall nằm trên vị trí một trong các Flame thì độ dài Flame đó sẽ được giảm đi để sao cho Flame chỉ xuất hiện đến vị trí đối tượng Brick/Wall theo hướng xuất hiện. Lúc đó chỉ có đối tượng Brick/Wall bị ảnh hưởng bởi Flame, các đối tượng tiếp theo không bị ảnh hưởng. Còn nếu vật cản Flame là một đối tượng Bomb khác thì đối tượng Bomb đó cũng sẽ nổ ngay lập tức.
 
 - Có thể pause game (ấn P) và tiếp tục chơi sau khi pause (ấn R). 
+- Với âm thanh (nhạc nền và hiệu ứng) có thể tắt (ấn M) và bật lại (ấn U).
 
 ## Chức năng
 [Tệp mô tả chức năng.](https://docs.google.com/document/d/144wgBKhvQFZuyWivwKFZjHCMWQdFK8tKKPn1Q25ELTQ/edit?usp=sharing)

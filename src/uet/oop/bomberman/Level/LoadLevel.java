@@ -10,7 +10,7 @@ public abstract class LoadLevel {
 
 	protected int _width = 20, _height = 20;
 	protected int _level;
-	protected static final int _max_level = 6;
+	protected static final int _max_level = 3;
 	protected GameBoard _Game_board;
 
 	public LoadLevel(GameBoard gameBoard, int level) throws LoadLevelException {
