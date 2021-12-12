@@ -76,7 +76,10 @@ public class Flame extends Entity {
 		}
 		return radius;
 	}
-	
+
+	/**
+	 * Xác định vị trí các bộ phận nổ.
+	 */
 	public FlameSegment flameSegmentAt(int x, int y) {
 		for (int i = 0; i < _flameSegments.length; i++) {
 			if(_flameSegments[i].getX() == x && _flameSegments[i].getY() == y)
