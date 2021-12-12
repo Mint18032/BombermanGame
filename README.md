@@ -48,5 +48,5 @@ Có 2 loại Enemy trong phiên bản này:
 [Tệp mô tả chức năng.](https://docs.google.com/document/d/144wgBKhvQFZuyWivwKFZjHCMWQdFK8tKKPn1Q25ELTQ/edit?usp=sharing)
 
 ## Demo video
-Xem tại [đây]().
+Xem tại [đây](https://drive.google.com/drive/folders/1gSDv7LECdllI1s3YKvFo0e4yjmAkIRcr?usp=sharing).
 
