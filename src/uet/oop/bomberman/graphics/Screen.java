@@ -76,7 +76,9 @@ public class Screen {
 		yOffset = yO;
 	}
 
-	//Tính toán vị trí của Bomber.
+	/**
+	 * Tính toán vị trí của Bomber.
+ 	 */
 	public static int calculateXOffset(GameBoard gameBoard, Bomber bomber) {
 		if(bomber == null) return 0;
 		int temp = xOffset;
