@@ -51,10 +51,6 @@ public class LayerEntity extends Entity {
 		}
 	}
 	
-	public void addBeforeTop(Entity e) {
-		_entities.add(_entities.size() - 1, e);
-	}
-	
 	@Override
 	public boolean collide(Entity e) {
                 
